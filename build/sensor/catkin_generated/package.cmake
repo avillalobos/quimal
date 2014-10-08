@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "sensor")
+set(sensor_MAINTAINER "rosmgr <rosmgr@todo.todo>")
+set(sensor_DEPRECATED "")
+set(sensor_VERSION "0.0.0")
+set(sensor_BUILD_DEPENDS )
+set(sensor_RUN_DEPENDS )
+set(sensor_BUILDTOOL_DEPENDS "catkin")

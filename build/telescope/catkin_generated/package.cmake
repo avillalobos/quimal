@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "telescope")
+set(telescope_MAINTAINER "rosmgr <rosmgr@todo.todo>")
+set(telescope_DEPRECATED "")
+set(telescope_VERSION "0.0.0")
+set(telescope_BUILD_DEPENDS )
+set(telescope_RUN_DEPENDS )
+set(telescope_BUILDTOOL_DEPENDS "catkin")

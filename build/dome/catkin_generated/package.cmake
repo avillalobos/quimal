@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "dome")
+set(dome_MAINTAINER "rosmgr <rosmgr@todo.todo>")
+set(dome_DEPRECATED "")
+set(dome_VERSION "0.0.0")
+set(dome_BUILD_DEPENDS "message_generation")
+set(dome_RUN_DEPENDS "message_runtime")
+set(dome_BUILDTOOL_DEPENDS "catkin")
