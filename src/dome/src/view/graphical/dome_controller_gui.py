@@ -85,6 +85,7 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.Start_Stop, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.log_function)
 		QtCore.QMetaObject.connectSlotsByName(TCS_Main_Panel)
 
+
 	def retranslateUi(self, TCS_Main_Panel):
 		
 		TCS_Main_Panel.setWindowTitle(_translate("TCS_Main_Panel", "MainWindow", None))
@@ -98,6 +99,8 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
 			self.LogMonitor.appendPlainText(str(roof_msg))
+			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
+
 
 	def open_dome(self):
 		thread = Thread(target = self.threaded_open_dome , args = (self,))
@@ -108,6 +111,7 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
 			self.LogMonitor.appendPlainText(str(roof_msg))
+			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
 
 	def close_dome(self):
 		thread = Thread(target = self.threaded_close_dome , args = (self,))
@@ -118,6 +122,7 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
 			self.LogMonitor.appendPlainText(str(roof_msg))
+			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
 
 	def emergency_stop(self):
 		thread = Thread(target = self.threaded_emergency_stop , args = (self,))
