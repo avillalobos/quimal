@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TCS_Main_Panel</class>
+ <widget class="QMainWindow" name="TCS_Main_Panel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="Start_Stop">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>520</y>
+      <width>94</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="LogMonitor">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>490</y>
+      <width>701</width>
+      <height>76</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="open_dome_btn">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>10</y>
+      <width>94</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open Dome</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="close_dome_btn">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>40</y>
+      <width>94</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close Dome</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="emergency_stop_btn">
+    <property name="geometry">
+     <rect>
+      <x>673</x>
+      <y>70</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Emergency Stop!</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>open_dome_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>TCS_Main_Panel</receiver>
+   <slot>open_dome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>744</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>615</x>
+     <y>45</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>close_dome_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>TCS_Main_Panel</receiver>
+   <slot>close_dome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>723</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>577</x>
+     <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>emergency_stop_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>TCS_Main_Panel</receiver>
+   <slot>emergency_stop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>713</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>open_dome()</slot>
+  <slot>close_dome()</slot>
+  <slot>emergency_stop()</slot>
+ </slots>
+</ui>
