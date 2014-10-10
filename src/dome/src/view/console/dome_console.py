@@ -25,6 +25,7 @@ def print_menu():
 	print "2) Close dome"
 
 if __name__ == "__main__":
+	rospy.init_node("dome_controller_client")
 	flag = True
 	while flag:
 		print_menu()
