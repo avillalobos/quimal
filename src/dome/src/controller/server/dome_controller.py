@@ -12,6 +12,7 @@ class DomeController:
 		self.STATES=["PREPARING","STARTING","OPENING","OPEN", "CLOSING", "PARKING", "PARKED", "CLOSED", "EMERGENCY_STOP"]
 		roof_initial_msg = self.getInitialState()
 		self.roof_status = None
+		self.last_roof_status = None
 		rospy.Subscriber("dome/roof/status", roof, self.callback)
 		while self.roof_status == None:
 			rospy.loginfo("waiting to store first message of roof status")
@@ -35,20 +36,22 @@ class DomeController:
 			rospy.logwarn("RECEIVED AN EMERGENCY STOP!, DOME WILL STOP AS SOON AS POSSIBLE!")
 		else:
 			rospy.loginfo("received new status: " + str(data.state))
+		self.last_roof_status = self.roof_status
 		self.roof_status = data
 
 	# Handler registered when the open service is requested
 	def handle_open(self,req):
 		#print "TCS is requesting to open roof at speed: ", req.speed
 		rospy.loginfo("TCS is requesting to open roof at speed: " + str(req.speed))
-		if self.roof_status.state == self.STATES[7]:
+		if self.roof_status.state == self.STATES[7] or self.roof_status.state == self.STATES[8]:
+			if self.roof_status.state == self.STATES[8]: self.roof_status = self.last_roof_status
 			# wait until action is completed
 			roof_msg = self.action_open()
 			return roof_msg
 		else:
 			roof_msg = roof()
-			roof.state = "Not possible to open due roof is in another state: " + self.roof_status.state
-			rospy.logwarn(roof.state)
+			roof_msg.state = "Not possible to open due roof is in another state: " + self.roof_status.state
+			rospy.logwarn(roof_msg.state)
 			return roof_msg
 	
 	# perform the actions to open the dome
@@ -63,7 +66,7 @@ class DomeController:
 				roof_msg.state=self.STATES[i]
 				self.pub.publish(roof_msg)
 				# This frequency should be modified once the hardware is connected
-				r = rospy.Rate(1) # 10hz
+				r = rospy.Rate(0.5) # 10hz
 				r.sleep()
 			else:
 				rospy.logwarn("Due an Emergency stop message, the opening of the dome has been stopped!")
@@ -74,13 +77,14 @@ class DomeController:
 	def handle_close(self,req):
 		rospy.loginfo("TCS is requesting to close roof at speed: " + str(req.speed))
 		#print "TCS is requesting to close roof at speed: ", req.speed
-		if self.roof_status.state == self.STATES[3]:
+		if self.roof_status.state == self.STATES[3] or self.roof_status.state == self.STATES[8]:
+			if self.roof_status.state == self.STATES[8]: self.roof_status = self.last_roof_status
 			roof_msg = self.action_close()
 			return roof_msg
 		else:
 			roof_msg = roof()
-			roof.state = "Not possible to close due roof is in another state: " + self.roof_status.state
-			rospy.logwarn(roof.state)
+			roof_msg.state = "Not possible to close due roof is in another state: " + self.roof_status.state
+			rospy.logwarn(roof_msg.state)
 			return roof_msg
 
 
@@ -95,7 +99,7 @@ class DomeController:
 				roof_msg.sensor3 = True
 				roof_msg.state=self.STATES[i]
 				self.pub.publish(roof_msg)
-				r = rospy.Rate(1) # 10hz
+				r = rospy.Rate(0.5) # 10hz
 				r.sleep()
 			else:
 				rospy.logwarn("Due an Emergency stop message, the close of the dome has been stopped!")
