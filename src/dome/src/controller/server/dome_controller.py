@@ -9,7 +9,7 @@ class DomeController:
 	def __init__(self):
 		self.pub = rospy.Publisher('dome/roof/status', roof, queue_size=100)
 		rospy.init_node('ROOF_Controller')
-		self.STATES=["PREPARING","STARTING","OPENING","OPEN", "CLOSING", "PARKING", "PARKED", "CLOSED"]
+		self.STATES=["PREPARING","STARTING","OPENING","OPEN", "CLOSING", "PARKING", "PARKED", "CLOSED", "EMERGENCY_STOP"]
 		roof_initial_msg = self.getInitialState()
 		self.roof_status = None
 		rospy.Subscriber("dome/roof/status", roof, self.callback)
@@ -31,7 +31,10 @@ class DomeController:
 	
 	# Callback to receive the status of the Dome at any time
 	def callback(self, data):
-		rospy.loginfo("received new status: " + str(data.state))
+		if data.state == self.STATES[8]:
+			rospy.logwarn("RECEIVED AN EMERGENCY STOP!, DOME WILL STOP AS SOON AS POSSIBLE!")
+		else:
+			rospy.loginfo("received new status: " + str(data.state))
 		self.roof_status = data
 
 	# Handler registered when the open service is requested
@@ -52,14 +55,19 @@ class DomeController:
 	def action_open(self):
 		roof_msg = roof()
 		for i in [0,1,2,3]:
-			roof_msg.ubication = i
-			roof_msg.sensor1 = True
-			roof_msg.sensor2 = False
-			roof_msg.sensor3 = True
-			roof_msg.state=self.STATES[i]
-			self.pub.publish(roof_msg)
-			r = rospy.Rate(1) # 10hz
-			r.sleep()
+			if self.roof_status.state != self.STATES[8]:
+				roof_msg.ubication = i
+				roof_msg.sensor1 = True
+				roof_msg.sensor2 = False
+				roof_msg.sensor3 = True
+				roof_msg.state=self.STATES[i]
+				self.pub.publish(roof_msg)
+				# This frequency should be modified once the hardware is connected
+				r = rospy.Rate(1) # 10hz
+				r.sleep()
+			else:
+				rospy.logwarn("Due an Emergency stop message, the opening of the dome has been stopped!")
+				break;
 		return roof_msg
 
 	# Handler registered when the close service is requested
@@ -80,14 +88,18 @@ class DomeController:
 	def action_close(self):
 		roof_msg = roof()
 		for i in [4,5,6,7]:
-			roof_msg.ubication = i
-			roof_msg.sensor1 = True
-			roof_msg.sensor2 = False
-			roof_msg.sensor3 = True
-			roof_msg.state=self.STATES[i]
-			self.pub.publish(roof_msg)
-			r = rospy.Rate(1) # 10hz
-			r.sleep()
+			if self.roof_status.state != self.STATES[8]:
+				roof_msg.ubication = i
+				roof_msg.sensor1 = True
+				roof_msg.sensor2 = False
+				roof_msg.sensor3 = True
+				roof_msg.state=self.STATES[i]
+				self.pub.publish(roof_msg)
+				r = rospy.Rate(1) # 10hz
+				r.sleep()
+			else:
+				rospy.logwarn("Due an Emergency stop message, the close of the dome has been stopped!")
+				break;
 		return roof_msg
 
 	# Starte the server to answer the different services handled	
