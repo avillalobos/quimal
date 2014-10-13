@@ -10,15 +10,16 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from dome.srv import *
+from dome.msg import *
+from threading import Thread
+from sensor_table_model import SensorTableModel
+
 import sys, os
 sys.path.append(os.path.abspath((os.path.dirname(__file__) + "/../../controller/")))
 import controller as controller
-
 import rospy
-from dome.srv import *
-from dome.msg import *
 
-from threading import Thread
 
 try:
 	_fromUtf8 = QtCore.QString.fromUtf8
@@ -41,6 +42,7 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		self.setupUi(self)
 		self.StartStop = True
 		rospy.init_node("dome_controller_client")
+		rospy.Subscriber("dome/roof/status", roof, self.updateSensorStatus)
 
 	def setupUi(self, TCS_Main_Panel):
 		TCS_Main_Panel.setObjectName(_fromUtf8("TCS_Main_Panel"))
@@ -77,7 +79,13 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		self.statusbar = QtGui.QStatusBar(TCS_Main_Panel)
 		self.statusbar.setObjectName(_fromUtf8("statusbar"))
 		TCS_Main_Panel.setStatusBar(self.statusbar)
-        
+       
+		self.sensor_display = SensorTableModel(5,3,self.centralwidget)
+		self.sensor_display.setGeometry(QtCore.QRect(10, 10, 431, 361))
+		self.sensor_display.setDragDropOverwriteMode(False)
+		self.sensor_display.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
+		self.sensor_display.setObjectName(_fromUtf8("sensor_display"))
+ 
 		self.retranslateUi(TCS_Main_Panel)
 		QtCore.QObject.connect(self.open_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.open_dome)
 		QtCore.QObject.connect(self.close_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.close_dome)
@@ -85,6 +93,11 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.Start_Stop, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.log_function)
 		QtCore.QMetaObject.connectSlotsByName(TCS_Main_Panel)
 
+	def updateSensorStatus(self, data):
+		self.sensor_display.updateSensorData("Sensor 1", "Warning", data.ubication)
+		self.sensor_display.updateSensorData("Sensor 2", "Critical", data.state)
+		self.sensor_display.updateSensorData("Sensor 3", "Ok", data.sensor1)
+		
 
 	def retranslateUi(self, TCS_Main_Panel):
 		
