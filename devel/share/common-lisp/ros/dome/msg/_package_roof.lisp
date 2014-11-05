@@ -7,4 +7,6 @@
           SENSOR2
           SENSOR3-VAL
           SENSOR3
+          STATE-VAL
+          STATE
 ))

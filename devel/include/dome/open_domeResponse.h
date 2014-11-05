@@ -103,7 +103,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/home/rosmgr/ros_catkin_ws/install_isolated/share/std_msgs/cmake/../msg'], 'dome': ['/home/rosmgr/quimal/src/dome/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -113,12 +113,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dome::open_domeResponse_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dome::open_domeResponse_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -147,12 +147,12 @@ struct MD5Sum< ::dome::open_domeResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "cbbdd3f7c5382e7f2ae887052ce258c9";
+    return "62590fa05cda626285acd4f75d1a5fe5";
   }
 
   static const char* value(const ::dome::open_domeResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xcbbdd3f7c5382e7fULL;
-  static const uint64_t static_value2 = 0x2ae887052ce258c9ULL;
+  static const uint64_t static_value1 = 0x62590fa05cda6262ULL;
+  static const uint64_t static_value2 = 0x85acd4f75d1a5fe5ULL;
 };
 
 template<class ContainerAllocator>
@@ -180,6 +180,7 @@ float32 ubication\n\
 bool sensor1\n\
 bool sensor2\n\
 bool sensor3\n\
+string state\n\
 ";
   }
 

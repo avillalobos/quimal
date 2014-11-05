@@ -105,7 +105,7 @@ import struct
 import dome.msg
 
 class close_domeResponse(genpy.Message):
-  _md5sum = "cbbdd3f7c5382e7f2ae887052ce258c9"
+  _md5sum = "62590fa05cda626285acd4f75d1a5fe5"
   _type = "dome/close_domeResponse"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """roof status
@@ -117,6 +117,7 @@ float32 ubication
 bool sensor1
 bool sensor2
 bool sensor3
+string state
 
 """
   __slots__ = ['status']
@@ -158,6 +159,12 @@ bool sensor3
     try:
       _x = self
       buff.write(_struct_f3B.pack(_x.status.ubication, _x.status.sensor1, _x.status.sensor2, _x.status.sensor3))
+      _x = self.status.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -177,6 +184,15 @@ bool sensor3
       self.status.sensor1 = bool(self.status.sensor1)
       self.status.sensor2 = bool(self.status.sensor2)
       self.status.sensor3 = bool(self.status.sensor3)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.status.state = str[start:end].decode('utf-8')
+      else:
+        self.status.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -191,6 +207,12 @@ bool sensor3
     try:
       _x = self
       buff.write(_struct_f3B.pack(_x.status.ubication, _x.status.sensor1, _x.status.sensor2, _x.status.sensor3))
+      _x = self.status.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -211,6 +233,15 @@ bool sensor3
       self.status.sensor1 = bool(self.status.sensor1)
       self.status.sensor2 = bool(self.status.sensor2)
       self.status.sensor3 = bool(self.status.sensor3)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.status.state = str[start:end].decode('utf-8')
+      else:
+        self.status.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -219,6 +250,6 @@ _struct_I = genpy.struct_I
 _struct_f3B = struct.Struct("<f3B")
 class close_dome(object):
   _type          = 'dome/close_dome'
-  _md5sum = '6b2cf0726d295207cb0af1ee517cbebb'
+  _md5sum = '1982571d872b947abb761709b9b8b573'
   _request_class  = close_domeRequest
   _response_class = close_domeResponse

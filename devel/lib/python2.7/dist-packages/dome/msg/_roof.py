@@ -6,17 +6,18 @@ import struct
 
 
 class roof(genpy.Message):
-  _md5sum = "3c7f88a43e1d11ad4eea29bace6120b0"
+  _md5sum = "904d6c5ea52702f7baaa63d7589e3626"
   _type = "dome/roof"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 ubication
 bool sensor1
 bool sensor2
 bool sensor3
+string state
 
 """
-  __slots__ = ['ubication','sensor1','sensor2','sensor3']
-  _slot_types = ['float32','bool','bool','bool']
+  __slots__ = ['ubication','sensor1','sensor2','sensor3','state']
+  _slot_types = ['float32','bool','bool','bool','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -26,7 +27,7 @@ bool sensor3
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       ubication,sensor1,sensor2,sensor3
+       ubication,sensor1,sensor2,sensor3,state
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -43,11 +44,14 @@ bool sensor3
         self.sensor2 = False
       if self.sensor3 is None:
         self.sensor3 = False
+      if self.state is None:
+        self.state = ''
     else:
       self.ubication = 0.
       self.sensor1 = False
       self.sensor2 = False
       self.sensor3 = False
+      self.state = ''
 
   def _get_types(self):
     """
@@ -63,6 +67,12 @@ bool sensor3
     try:
       _x = self
       buff.write(_struct_f3B.pack(_x.ubication, _x.sensor1, _x.sensor2, _x.sensor3))
+      _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -80,6 +90,15 @@ bool sensor3
       self.sensor1 = bool(self.sensor1)
       self.sensor2 = bool(self.sensor2)
       self.sensor3 = bool(self.sensor3)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.state = str[start:end].decode('utf-8')
+      else:
+        self.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -94,6 +113,12 @@ bool sensor3
     try:
       _x = self
       buff.write(_struct_f3B.pack(_x.ubication, _x.sensor1, _x.sensor2, _x.sensor3))
+      _x = self.state
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -112,6 +137,15 @@ bool sensor3
       self.sensor1 = bool(self.sensor1)
       self.sensor2 = bool(self.sensor2)
       self.sensor3 = bool(self.sensor3)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.state = str[start:end].decode('utf-8')
+      else:
+        self.state = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

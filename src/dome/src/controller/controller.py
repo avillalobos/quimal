@@ -12,3 +12,7 @@ def open_dome(speed):
 def close_dome(speed):
 	global dome_controller_client
 	return dome_controller_client.try_close(speed)
+
+def emergency_stop():
+	global dome_controller_client
+	return dome_controller_client.emergency_stop()

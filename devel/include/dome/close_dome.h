@@ -73,7 +73,7 @@ template<>
 struct MD5Sum< ::dome::close_dome > {
   static const char* value()
   {
-    return "6b2cf0726d295207cb0af1ee517cbebb";
+    return "1982571d872b947abb761709b9b8b573";
   }
 
   static const char* value(const ::dome::close_dome&) { return value(); }

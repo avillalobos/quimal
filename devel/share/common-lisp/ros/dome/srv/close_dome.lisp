@@ -45,10 +45,10 @@
   "dome/close_domeRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<close_dome-request>)))
   "Returns md5sum for a message object of type '<close_dome-request>"
-  "6b2cf0726d295207cb0af1ee517cbebb")
+  "1982571d872b947abb761709b9b8b573")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'close_dome-request)))
   "Returns md5sum for a message object of type 'close_dome-request"
-  "6b2cf0726d295207cb0af1ee517cbebb")
+  "1982571d872b947abb761709b9b8b573")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<close_dome-request>)))
   "Returns full string definition for message of type '<close_dome-request>"
   (cl:format cl:nil "uint16 speed~%~%~%"))
@@ -103,16 +103,16 @@
   "dome/close_domeResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<close_dome-response>)))
   "Returns md5sum for a message object of type '<close_dome-response>"
-  "6b2cf0726d295207cb0af1ee517cbebb")
+  "1982571d872b947abb761709b9b8b573")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'close_dome-response)))
   "Returns md5sum for a message object of type 'close_dome-response"
-  "6b2cf0726d295207cb0af1ee517cbebb")
+  "1982571d872b947abb761709b9b8b573")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<close_dome-response>)))
   "Returns full string definition for message of type '<close_dome-response>"
-  (cl:format cl:nil "roof status~%~%~%================================================================================~%MSG: dome/roof~%float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%~%~%"))
+  (cl:format cl:nil "roof status~%~%~%================================================================================~%MSG: dome/roof~%float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%string state~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'close_dome-response)))
   "Returns full string definition for message of type 'close_dome-response"
-  (cl:format cl:nil "roof status~%~%~%================================================================================~%MSG: dome/roof~%float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%~%~%"))
+  (cl:format cl:nil "roof status~%~%~%================================================================================~%MSG: dome/roof~%float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%string state~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <close_dome-response>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'status))

@@ -60,13 +60,15 @@ struct roof_
     : ubication(0.0)
     , sensor1(false)
     , sensor2(false)
-    , sensor3(false)  {
+    , sensor3(false)
+    , state()  {
     }
   roof_(const ContainerAllocator& _alloc)
     : ubication(0.0)
     , sensor1(false)
     , sensor2(false)
-    , sensor3(false)  {
+    , sensor3(false)
+    , state(_alloc)  {
     }
 
 
@@ -82,6 +84,9 @@ struct roof_
 
    typedef uint8_t _sensor3_type;
   _sensor3_type sensor3;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _state_type;
+  _state_type state;
 
 
 
@@ -117,7 +122,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/home/rosmgr/ros_catkin_ws/install_isolated/share/std_msgs/cmake/../msg'], 'dome': ['/home/rosmgr/quimal/src/dome/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -127,12 +132,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dome::roof_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::dome::roof_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -161,12 +166,12 @@ struct MD5Sum< ::dome::roof_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "3c7f88a43e1d11ad4eea29bace6120b0";
+    return "904d6c5ea52702f7baaa63d7589e3626";
   }
 
   static const char* value(const ::dome::roof_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x3c7f88a43e1d11adULL;
-  static const uint64_t static_value2 = 0x4eea29bace6120b0ULL;
+  static const uint64_t static_value1 = 0x904d6c5ea52702f7ULL;
+  static const uint64_t static_value2 = 0xbaaa63d7589e3626ULL;
 };
 
 template<class ContainerAllocator>
@@ -189,6 +194,7 @@ struct Definition< ::dome::roof_<ContainerAllocator> >
 bool sensor1\n\
 bool sensor2\n\
 bool sensor3\n\
+string state\n\
 ";
   }
 
@@ -211,6 +217,7 @@ namespace serialization
       stream.next(m.sensor1);
       stream.next(m.sensor2);
       stream.next(m.sensor3);
+      stream.next(m.state);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -237,6 +244,8 @@ struct Printer< ::dome::roof_<ContainerAllocator> >
     Printer<uint8_t>::stream(s, indent + "  ", v.sensor2);
     s << indent << "sensor3: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.sensor3);
+    s << indent << "state: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.state);
   }
 };
 

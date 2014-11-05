@@ -26,7 +26,12 @@
     :reader sensor3
     :initarg :sensor3
     :type cl:boolean
-    :initform cl:nil))
+    :initform cl:nil)
+   (state
+    :reader state
+    :initarg :state
+    :type cl:string
+    :initform ""))
 )
 
 (cl:defclass roof (<roof>)
@@ -56,6 +61,11 @@
 (cl:defmethod sensor3-val ((m <roof>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader dome-msg:sensor3-val is deprecated.  Use dome-msg:sensor3 instead.")
   (sensor3 m))
+
+(cl:ensure-generic-function 'state-val :lambda-list '(m))
+(cl:defmethod state-val ((m <roof>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader dome-msg:state-val is deprecated.  Use dome-msg:state instead.")
+  (state m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <roof>) ostream)
   "Serializes a message object of type '<roof>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'ubication))))
@@ -66,6 +76,12 @@
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'sensor1) 1 0)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'sensor2) 1 0)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'sensor3) 1 0)) ostream)
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'state))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'state))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <roof>) istream)
   "Deserializes a message object of type '<roof>"
@@ -78,6 +94,14 @@
     (cl:setf (cl:slot-value msg 'sensor1) (cl:not (cl:zerop (cl:read-byte istream))))
     (cl:setf (cl:slot-value msg 'sensor2) (cl:not (cl:zerop (cl:read-byte istream))))
     (cl:setf (cl:slot-value msg 'sensor3) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'state) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'state) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<roof>)))
@@ -88,22 +112,23 @@
   "dome/roof")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<roof>)))
   "Returns md5sum for a message object of type '<roof>"
-  "3c7f88a43e1d11ad4eea29bace6120b0")
+  "904d6c5ea52702f7baaa63d7589e3626")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'roof)))
   "Returns md5sum for a message object of type 'roof"
-  "3c7f88a43e1d11ad4eea29bace6120b0")
+  "904d6c5ea52702f7baaa63d7589e3626")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<roof>)))
   "Returns full string definition for message of type '<roof>"
-  (cl:format cl:nil "float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%~%~%"))
+  (cl:format cl:nil "float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%string state~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'roof)))
   "Returns full string definition for message of type 'roof"
-  (cl:format cl:nil "float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%~%~%"))
+  (cl:format cl:nil "float32 ubication~%bool sensor1~%bool sensor2~%bool sensor3~%string state~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <roof>))
   (cl:+ 0
      4
      1
      1
      1
+     4 (cl:length (cl:slot-value msg 'state))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <roof>))
   "Converts a ROS message object to a list"
@@ -112,4 +137,5 @@
     (cl:cons ':sensor1 (sensor1 msg))
     (cl:cons ':sensor2 (sensor2 msg))
     (cl:cons ':sensor3 (sensor3 msg))
+    (cl:cons ':state (state msg))
 ))
