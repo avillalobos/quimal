@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'tcs_gui.ui'
 #
-# Created: Sat Nov  8 00:02:03 2014
+# Created: Sat Nov  8 00:41:30 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,9 +71,9 @@ class Ui_TCS_Main_Panel(object):
         self.dateEdit_2 = QtGui.QDateEdit(self.centralwidget)
         self.dateEdit_2.setGeometry(QtCore.QRect(780, 90, 110, 23))
         self.dateEdit_2.setObjectName(_fromUtf8("dateEdit_2"))
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(460, 90, 95, 24))
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.btn_generate_log = QtGui.QPushButton(self.centralwidget)
+        self.btn_generate_log.setGeometry(QtCore.QRect(460, 90, 95, 24))
+        self.btn_generate_log.setObjectName(_fromUtf8("btn_generate_log"))
         self.start_date_label = QtGui.QLabel(self.centralwidget)
         self.start_date_label.setGeometry(QtCore.QRect(580, 90, 41, 21))
         self.start_date_label.setObjectName(_fromUtf8("start_date_label"))
@@ -107,6 +107,7 @@ class Ui_TCS_Main_Panel(object):
         QtCore.QObject.connect(self.open_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.open_dome)
         QtCore.QObject.connect(self.close_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.close_dome)
         QtCore.QObject.connect(self.emergency_stop_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.emergency_stop)
+        QtCore.QObject.connect(self.btn_generate_log, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.generate_log)
         QtCore.QMetaObject.connectSlotsByName(TCS_Main_Panel)
 
     def retranslateUi(self, TCS_Main_Panel):
@@ -116,7 +117,7 @@ class Ui_TCS_Main_Panel(object):
         self.close_dome_btn.setText(_translate("TCS_Main_Panel", "Close Dome", None))
         self.emergency_stop_btn.setText(_translate("TCS_Main_Panel", "Emergency Stop!", None))
         self.camera_view.setText(_translate("TCS_Main_Panel", "TextLabel", None))
-        self.pushButton.setText(_translate("TCS_Main_Panel", "Generate Log", None))
+        self.btn_generate_log.setText(_translate("TCS_Main_Panel", "Generate Log", None))
         self.start_date_label.setText(_translate("TCS_Main_Panel", "Start", None))
         self.start_date_label_2.setText(_translate("TCS_Main_Panel", "End", None))
         self.lbl_sideral_time.setText(_translate("TCS_Main_Panel", "Sideral Time", None))
