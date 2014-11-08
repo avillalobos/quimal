@@ -132,7 +132,9 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		np_arr = np.fromstring(ros_data.data, np.uint8)
 		image_np = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
 		self.image_data = np_arr
-	
+
+	def generate_log(self):
+		print self.sensor_display.getSelectedItems()
 
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
