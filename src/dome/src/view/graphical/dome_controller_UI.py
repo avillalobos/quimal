@@ -120,6 +120,6 @@ class Ui_TCS_Main_Panel(object):
         self.btn_generate_log.setText(_translate("TCS_Main_Panel", "Generate Log", None))
         self.start_date_label.setText(_translate("TCS_Main_Panel", "Start", None))
         self.start_date_label_2.setText(_translate("TCS_Main_Panel", "End", None))
-        self.lbl_sideral_time.setText(_translate("TCS_Main_Panel", "Sideral Time", None))
+        self.lbl_sideral_time.setText(_translate("TCS_Main_Panel", "Sidereal Time", None))
         self.lbl_local_time.setText(_translate("TCS_Main_Panel", "UTC Time", None))
 
