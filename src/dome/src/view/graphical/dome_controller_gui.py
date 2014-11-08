@@ -2,112 +2,85 @@
 
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tcs_gui.ui'
-#
-# Created: Fri Oct 10 00:05:27 2014
-#      by: PyQt4 UI code generator 4.10.4
-#
-# WARNING! All changes made in this file will be lost!
-
-from PyQt4 import QtCore, QtGui
 from dome.srv import *
 from dome.msg import *
 from threading import Thread
 from sensor_table_model import SensorTableModel
+from PyQt4 import QtCore, QtGui
+from PyQt4.QtCore import Qt, QTimer
+from sensor_msgs.msg import CompressedImage
 
+import datetime
+import cv2
+import numpy as np
+import dome_controller_UI 
 import sys, os
 sys.path.append(os.path.abspath((os.path.dirname(__file__) + "/../../controller/")))
 import controller as controller
 import rospy
 
+try:
+        _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+        def _fromUtf8(s):
+                return s
 
 try:
-	_fromUtf8 = QtCore.QString.fromUtf8
+        _encoding = QtGui.QApplication.UnicodeUTF8
+        def _translate(context, text, disambig):
+                return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
-	def _fromUtf8(s):
-		return s
+        def _translate(context, text, disambig):
+                return QtGui.QApplication.translate(context, text, disambig)
 
-try:
-	_encoding = QtGui.QApplication.UnicodeUTF8
-	def _translate(context, text, disambig):
-		return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-	def _translate(context, text, disambig):
-		return QtGui.QApplication.translate(context, text, disambig)
+image_data = None
 
-class Ui_TCS_Main_Panel(QtGui.QMainWindow):
+class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel):
 
-	def __init__(self):
+	def __init__(self, parent=None):
 		QtGui.QWidget.__init__(self)
+		super(GUI_TCS_Main_Panel, self).__init__(parent)
 		self.setupUi(self)
+		self.create_tableview()
 		self.StartStop = True
 		rospy.init_node("dome_controller_client")
 		rospy.Subscriber("dome/roof/status", roof, self.updateSensorStatus)
+		self.image_data = None
+		rospy.Subscriber("/camera/image/compressed", CompressedImage, self.image_callback,  queue_size = 1)
+	
+		self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+		self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
 
-	def setupUi(self, TCS_Main_Panel):
-		TCS_Main_Panel.setObjectName(_fromUtf8("TCS_Main_Panel"))
-		TCS_Main_Panel.resize(800, 600)
-		self.centralwidget = QtGui.QWidget(TCS_Main_Panel)
-		self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-		self.Start_Stop = QtGui.QPushButton(self.centralwidget)
-		self.Start_Stop.setGeometry(QtCore.QRect(700, 520, 94, 24))
-		self.Start_Stop.setObjectName(_fromUtf8("Start_Stop"))
-		self.LogMonitor = QtGui.QPlainTextEdit(self.centralwidget)
-		self.LogMonitor.setGeometry(QtCore.QRect(0, 490, 701, 76))
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.MinimumExpanding)
-		sizePolicy.setHorizontalStretch(0)
-		sizePolicy.setVerticalStretch(0)
-		sizePolicy.setHeightForWidth(self.LogMonitor.sizePolicy().hasHeightForWidth())
-		self.LogMonitor.setSizePolicy(sizePolicy)
-		self.LogMonitor.setMaximumSize(QtCore.QSize(16777215, 16777215))
-		self.LogMonitor.setReadOnly(True)
-		self.LogMonitor.setObjectName(_fromUtf8("LogMonitor"))
-		self.open_dome_btn = QtGui.QPushButton(self.centralwidget)
-		self.open_dome_btn.setGeometry(QtCore.QRect(690, 10, 94, 24))
-		self.open_dome_btn.setObjectName(_fromUtf8("open_dome_btn"))
-		self.close_dome_btn = QtGui.QPushButton(self.centralwidget)
-		self.close_dome_btn.setGeometry(QtCore.QRect(690, 40, 94, 24))
-		self.close_dome_btn.setObjectName(_fromUtf8("close_dome_btn"))
-		self.emergency_stop_btn = QtGui.QPushButton(self.centralwidget)
-		self.emergency_stop_btn.setGeometry(QtCore.QRect(673, 70, 111, 51))
-		self.emergency_stop_btn.setObjectName(_fromUtf8("emergency_stop_btn"))
-		TCS_Main_Panel.setCentralWidget(self.centralwidget)
-		self.menubar = QtGui.QMenuBar(TCS_Main_Panel)
-		self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
-		self.menubar.setObjectName(_fromUtf8("menubar"))
-		TCS_Main_Panel.setMenuBar(self.menubar)
-		self.statusbar = QtGui.QStatusBar(TCS_Main_Panel)
-		self.statusbar.setObjectName(_fromUtf8("statusbar"))
-		TCS_Main_Panel.setStatusBar(self.statusbar)
-       
+		self.timer = QTimer(self)
+		self.timer.timeout.connect(self._get_new_image)
+		self.timer.start(1000)
+
+		self.clock_timer = QTimer(self)
+		self.clock_timer.timeout.connect(self.update_lcd_time)
+		self.clock_timer.start(1000)
+
+	def create_tableview(self):
 		self.sensor_display = SensorTableModel(5,3,self.centralwidget)
-		self.sensor_display.setGeometry(QtCore.QRect(10, 10, 431, 361))
 		self.sensor_display.setDragDropOverwriteMode(False)
-		self.sensor_display.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
+		self.sensor_display.setGeometry(QtCore.QRect(460, 120, 431, 361))
 		self.sensor_display.setObjectName(_fromUtf8("sensor_display"))
- 
-		self.retranslateUi(TCS_Main_Panel)
-		QtCore.QObject.connect(self.open_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.open_dome)
-		QtCore.QObject.connect(self.close_dome_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.close_dome)
-		QtCore.QObject.connect(self.emergency_stop_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.emergency_stop)
-		QtCore.QObject.connect(self.Start_Stop, QtCore.SIGNAL(_fromUtf8("clicked()")), TCS_Main_Panel.log_function)
-		QtCore.QMetaObject.connectSlotsByName(TCS_Main_Panel)
+
+
+	def update_lcd_time(self):
+		#time = QtCore.QTime.currentTime()
+		#text = time.toString('hh:mm:ss')
+		utc_time = datetime.datetime.utcnow()
+		text = utc_time.strftime("%H:%M:%S")
+		self.lcd_local_time.display(text)
+		self.lcd_sideral_time.display(text)
 
 	def updateSensorStatus(self, data):
 		self.sensor_display.updateSensorData("Sensor 1", "Warning", data.ubication)
 		self.sensor_display.updateSensorData("Sensor 2", "Critical", data.state)
 		self.sensor_display.updateSensorData("Sensor 3", "Ok", data.sensor1)
 		
-
-	def retranslateUi(self, TCS_Main_Panel):
-		
-		TCS_Main_Panel.setWindowTitle(_translate("TCS_Main_Panel", "MainWindow", None))
-		self.Start_Stop.setText(_translate("TCS_Main_Panel", "Stop!", None))
-		self.open_dome_btn.setText(_translate("TCS_Main_Panel", "Open Dome", None))
-		self.close_dome_btn.setText(_translate("TCS_Main_Panel", "Close Dome", None))
-		self.emergency_stop_btn.setText(_translate("TCS_Main_Panel", "Emergency Stop!", None))
-
 	def threaded_open_dome(self, empty):
+		print "opening"
 		roof_msg = controller.open_dome(speed=1)
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
@@ -148,8 +121,21 @@ class Ui_TCS_Main_Panel(QtGui.QMainWindow):
 		else:
 			self.Start_Stop.setText(_translate("TCS_Main_Panel", "Stop!", None))
 
+	def _get_new_image(self):
+		if self.image_data != None:
+			myPixmap = QtGui.QPixmap(QtGui.QImage.fromData(self.image_data))
+			myScaledPixmap = myPixmap.scaled(self.camera_view.size(), QtCore.Qt.KeepAspectRatio)
+			self.camera_view.setPixmap(myScaledPixmap)
+
+	def image_callback(self, ros_data):
+		#### direct conversion to CV2 ####
+		np_arr = np.fromstring(ros_data.data, np.uint8)
+		image_np = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
+		self.image_data = np_arr
+	
+
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
-	myapp = Ui_TCS_Main_Panel()
+	myapp = GUI_TCS_Main_Panel()
 	myapp.show()
 	sys.exit(app.exec_())
