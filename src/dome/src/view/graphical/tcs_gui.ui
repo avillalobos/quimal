@@ -227,7 +227,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Sideral Time</string>
+     <string>Sidereal Time</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
