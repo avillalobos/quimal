@@ -150,18 +150,210 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-sensor/CMakeFiles/_catkin_empty_exported_target.dir/rule:
-	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/_catkin_empty_exported_target.dir/rule
-.PHONY : sensor/CMakeFiles/_catkin_empty_exported_target.dir/rule
+sensor/CMakeFiles/camera_server.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/camera_server.dir/rule
+.PHONY : sensor/CMakeFiles/camera_server.dir/rule
 
 # Convenience name for target.
-_catkin_empty_exported_target: sensor/CMakeFiles/_catkin_empty_exported_target.dir/rule
-.PHONY : _catkin_empty_exported_target
+camera_server: sensor/CMakeFiles/camera_server.dir/rule
+.PHONY : camera_server
 
 # fast build rule for target.
-_catkin_empty_exported_target/fast:
-	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/_catkin_empty_exported_target.dir/build.make sensor/CMakeFiles/_catkin_empty_exported_target.dir/build
-.PHONY : _catkin_empty_exported_target/fast
+camera_server/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/camera_server.dir/build.make sensor/CMakeFiles/camera_server.dir/build
+.PHONY : camera_server/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_cpp: sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make sensor/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_lisp: sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : geometry_msgs_generate_messages_lisp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_lisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make sensor/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+.PHONY : geometry_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+.PHONY : sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_py: sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+.PHONY : geometry_msgs_generate_messages_py
+
+# fast build rule for target.
+geometry_msgs_generate_messages_py/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make sensor/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+.PHONY : geometry_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make sensor/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_lisp: sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make sensor/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : sensor/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: sensor/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/roscpp_generate_messages_py.dir/build.make sensor/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make sensor/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+.PHONY : sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_lisp: sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make sensor/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make sensor/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+.PHONY : sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_cpp: sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+.PHONY : sensor_msgs_generate_messages_cpp
+
+# fast build rule for target.
+sensor_msgs_generate_messages_cpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make sensor/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+.PHONY : sensor_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+.PHONY : sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_lisp: sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+.PHONY : sensor_msgs_generate_messages_lisp
+
+# fast build rule for target.
+sensor_msgs_generate_messages_lisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make sensor/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+.PHONY : sensor_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+.PHONY : sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_py: sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+.PHONY : sensor_msgs_generate_messages_py
+
+# fast build rule for target.
+sensor_msgs_generate_messages_py/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make sensor/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+.PHONY : sensor_msgs_generate_messages_py/fast
+
+src/controller/camera_server.o: src/controller/camera_server.cpp.o
+.PHONY : src/controller/camera_server.o
+
+# target to build an object file
+src/controller/camera_server.cpp.o:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/camera_server.dir/build.make sensor/CMakeFiles/camera_server.dir/src/controller/camera_server.cpp.o
+.PHONY : src/controller/camera_server.cpp.o
+
+src/controller/camera_server.i: src/controller/camera_server.cpp.i
+.PHONY : src/controller/camera_server.i
+
+# target to preprocess a source file
+src/controller/camera_server.cpp.i:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/camera_server.dir/build.make sensor/CMakeFiles/camera_server.dir/src/controller/camera_server.cpp.i
+.PHONY : src/controller/camera_server.cpp.i
+
+src/controller/camera_server.s: src/controller/camera_server.cpp.s
+.PHONY : src/controller/camera_server.s
+
+# target to generate assembly for a file
+src/controller/camera_server.cpp.s:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f sensor/CMakeFiles/camera_server.dir/build.make sensor/CMakeFiles/camera_server.dir/src/controller/camera_server.cpp.s
+.PHONY : src/controller/camera_server.cpp.s
 
 # Help Target
 help:
@@ -169,14 +361,29 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... _catkin_empty_exported_target"
+	@echo "... camera_server"
 	@echo "... edit_cache"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... roscpp_generate_messages_lisp"
+	@echo "... roscpp_generate_messages_py"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... sensor_msgs_generate_messages_cpp"
+	@echo "... sensor_msgs_generate_messages_lisp"
+	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... test"
+	@echo "... src/controller/camera_server.o"
+	@echo "... src/controller/camera_server.i"
+	@echo "... src/controller/camera_server.s"
 .PHONY : help
 
 
