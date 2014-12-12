@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'tcs_gui.ui'
 #
-# Created: Sat Nov  8 00:41:30 2014
+# Created: Fri Nov 14 00:42:18 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -87,7 +87,7 @@ class Ui_TCS_Main_Panel(object):
         self.lcd_sideral_time.setProperty("intValue", 0)
         self.lcd_sideral_time.setObjectName(_fromUtf8("lcd_sideral_time"))
         self.lbl_sideral_time = QtGui.QLabel(self.centralwidget)
-        self.lbl_sideral_time.setGeometry(QtCore.QRect(670, 10, 80, 22))
+        self.lbl_sideral_time.setGeometry(QtCore.QRect(659, 10, 91, 22))
         self.lbl_sideral_time.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lbl_sideral_time.setObjectName(_fromUtf8("lbl_sideral_time"))
         self.lbl_local_time = QtGui.QLabel(self.centralwidget)

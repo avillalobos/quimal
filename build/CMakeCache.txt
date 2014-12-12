@@ -313,7 +313,7 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 image_transport_DIR:PATH=/home/rosmgr/ros_catkin_ws/install_isolated/share/image_transport/cmake
 
 //Path to a library.
-lib:FILEPATH=/home/rosmgr/ros_catkin_ws/install_isolated/lib/libroslib.so
+lib:FILEPATH=/home/rosmgr/ros_catkin_ws/devel_isolated/serial/lib/libserial.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/home/rosmgr/ros_catkin_ws/install_isolated/share/message_filters/cmake
@@ -359,6 +359,9 @@ sensor_SOURCE_DIR:STATIC=/home/rosmgr/quimal/src/sensor
 
 //The directory containing a CMake configuration file for sensor_msgs.
 sensor_msgs_DIR:PATH=/home/rosmgr/ros_catkin_ws/install_isolated/share/sensor_msgs/cmake
+
+//The directory containing a CMake configuration file for serial.
+serial_DIR:PATH=/home/rosmgr/ros_catkin_ws/devel_isolated/serial/share/serial/cmake
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/home/rosmgr/ros_catkin_ws/install_isolated/share/std_msgs/cmake

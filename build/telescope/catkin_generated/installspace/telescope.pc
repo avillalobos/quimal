@@ -3,6 +3,6 @@ prefix=/home/rosmgr/quimal/install
 Name: telescope
 Description: Description of telescope
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/rosmgr/quimal/install/include
 Libs: -L/home/rosmgr/quimal/install/lib 
-Requires: 
+Requires: message_runtime

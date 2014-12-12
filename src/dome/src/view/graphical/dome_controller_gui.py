@@ -8,7 +8,8 @@ from threading import Thread
 from sensor_table_model import SensorTableModel
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt, QTimer
-from sensor_msgs.msg import CompressedImage
+#from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import Image
 
 import datetime
 import cv2
@@ -46,7 +47,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		rospy.init_node("dome_controller_client")
 		rospy.Subscriber("dome/roof/status", roof, self.updateSensorStatus)
 		self.image_data = None
-		rospy.Subscriber("/camera/image/compressed", CompressedImage, self.image_callback,  queue_size = 1)
+		rospy.Subscriber("/camera/image/compressed", Image, self.image_callback,  queue_size = 5)
 	
 		self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
 		self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
@@ -123,14 +124,18 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 
 	def _get_new_image(self):
 		if self.image_data != None:
-			myPixmap = QtGui.QPixmap(QtGui.QImage.fromData(self.image_data))
-			myScaledPixmap = myPixmap.scaled(self.camera_view.size(), QtCore.Qt.KeepAspectRatio)
-			self.camera_view.setPixmap(myScaledPixmap)
+			qimage = QtGui.QImage(self.image_data,200,200, QtGui.QImage.Format_RGB888)
+			myPixmap = QtGui.QPixmap(qimage)
+			if myPixmap != None and not myPixmap.isNull(): 
+				myScaledPixmap = myPixmap.scaled(self.camera_view.size(), QtCore.Qt.KeepAspectRatio)
+				print myScaledPixmap
+				if myScaledPixmap != None:
+					self.camera_view.setPixmap(myScaledPixmap)
 
 	def image_callback(self, ros_data):
+		print "image received", ros_data
 		#### direct conversion to CV2 ####
-		np_arr = np.fromstring(ros_data.data, np.uint8)
-		image_np = cv2.imdecode(np_arr, cv2.CV_LOAD_IMAGE_COLOR)
+		np_arr = np.fromstring(str(ros_data.data), np.uint8)
 		self.image_data = np_arr
 
 	def generate_log(self):

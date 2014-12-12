@@ -150,18 +150,140 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-telescope/CMakeFiles/_catkin_empty_exported_target.dir/rule:
-	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/_catkin_empty_exported_target.dir/rule
-.PHONY : telescope/CMakeFiles/_catkin_empty_exported_target.dir/rule
+telescope/CMakeFiles/telescope_controller.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_controller.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_controller.dir/rule
 
 # Convenience name for target.
-_catkin_empty_exported_target: telescope/CMakeFiles/_catkin_empty_exported_target.dir/rule
-.PHONY : _catkin_empty_exported_target
+telescope_controller: telescope/CMakeFiles/telescope_controller.dir/rule
+.PHONY : telescope_controller
 
 # fast build rule for target.
-_catkin_empty_exported_target/fast:
-	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/_catkin_empty_exported_target.dir/build.make telescope/CMakeFiles/_catkin_empty_exported_target.dir/build
-.PHONY : _catkin_empty_exported_target/fast
+telescope_controller/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_controller.dir/build.make telescope/CMakeFiles/telescope_controller.dir/build
+.PHONY : telescope_controller/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_gencpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_gencpp.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_gencpp.dir/rule
+
+# Convenience name for target.
+telescope_gencpp: telescope/CMakeFiles/telescope_gencpp.dir/rule
+.PHONY : telescope_gencpp
+
+# fast build rule for target.
+telescope_gencpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_gencpp.dir/build.make telescope/CMakeFiles/telescope_gencpp.dir/build
+.PHONY : telescope_gencpp/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_generate_messages.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_generate_messages.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_generate_messages.dir/rule
+
+# Convenience name for target.
+telescope_generate_messages: telescope/CMakeFiles/telescope_generate_messages.dir/rule
+.PHONY : telescope_generate_messages
+
+# fast build rule for target.
+telescope_generate_messages/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_generate_messages.dir/build.make telescope/CMakeFiles/telescope_generate_messages.dir/build
+.PHONY : telescope_generate_messages/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_generate_messages_cpp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_generate_messages_cpp.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+telescope_generate_messages_cpp: telescope/CMakeFiles/telescope_generate_messages_cpp.dir/rule
+.PHONY : telescope_generate_messages_cpp
+
+# fast build rule for target.
+telescope_generate_messages_cpp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_generate_messages_cpp.dir/build.make telescope/CMakeFiles/telescope_generate_messages_cpp.dir/build
+.PHONY : telescope_generate_messages_cpp/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_generate_messages_lisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_generate_messages_lisp.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+telescope_generate_messages_lisp: telescope/CMakeFiles/telescope_generate_messages_lisp.dir/rule
+.PHONY : telescope_generate_messages_lisp
+
+# fast build rule for target.
+telescope_generate_messages_lisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_generate_messages_lisp.dir/build.make telescope/CMakeFiles/telescope_generate_messages_lisp.dir/build
+.PHONY : telescope_generate_messages_lisp/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_generate_messages_py.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_generate_messages_py.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_generate_messages_py.dir/rule
+
+# Convenience name for target.
+telescope_generate_messages_py: telescope/CMakeFiles/telescope_generate_messages_py.dir/rule
+.PHONY : telescope_generate_messages_py
+
+# fast build rule for target.
+telescope_generate_messages_py/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_generate_messages_py.dir/build.make telescope/CMakeFiles/telescope_generate_messages_py.dir/build
+.PHONY : telescope_generate_messages_py/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_genlisp.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_genlisp.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_genlisp.dir/rule
+
+# Convenience name for target.
+telescope_genlisp: telescope/CMakeFiles/telescope_genlisp.dir/rule
+.PHONY : telescope_genlisp
+
+# fast build rule for target.
+telescope_genlisp/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_genlisp.dir/build.make telescope/CMakeFiles/telescope_genlisp.dir/build
+.PHONY : telescope_genlisp/fast
+
+# Convenience name for target.
+telescope/CMakeFiles/telescope_genpy.dir/rule:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f CMakeFiles/Makefile2 telescope/CMakeFiles/telescope_genpy.dir/rule
+.PHONY : telescope/CMakeFiles/telescope_genpy.dir/rule
+
+# Convenience name for target.
+telescope_genpy: telescope/CMakeFiles/telescope_genpy.dir/rule
+.PHONY : telescope_genpy
+
+# fast build rule for target.
+telescope_genpy/fast:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_genpy.dir/build.make telescope/CMakeFiles/telescope_genpy.dir/build
+.PHONY : telescope_genpy/fast
+
+src/controller/server/telescope_controller.o: src/controller/server/telescope_controller.cpp.o
+.PHONY : src/controller/server/telescope_controller.o
+
+# target to build an object file
+src/controller/server/telescope_controller.cpp.o:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_controller.dir/build.make telescope/CMakeFiles/telescope_controller.dir/src/controller/server/telescope_controller.cpp.o
+.PHONY : src/controller/server/telescope_controller.cpp.o
+
+src/controller/server/telescope_controller.i: src/controller/server/telescope_controller.cpp.i
+.PHONY : src/controller/server/telescope_controller.i
+
+# target to preprocess a source file
+src/controller/server/telescope_controller.cpp.i:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_controller.dir/build.make telescope/CMakeFiles/telescope_controller.dir/src/controller/server/telescope_controller.cpp.i
+.PHONY : src/controller/server/telescope_controller.cpp.i
+
+src/controller/server/telescope_controller.s: src/controller/server/telescope_controller.cpp.s
+.PHONY : src/controller/server/telescope_controller.s
+
+# target to generate assembly for a file
+src/controller/server/telescope_controller.cpp.s:
+	cd /home/rosmgr/quimal/build && $(MAKE) -f telescope/CMakeFiles/telescope_controller.dir/build.make telescope/CMakeFiles/telescope_controller.dir/src/controller/server/telescope_controller.cpp.s
+.PHONY : src/controller/server/telescope_controller.cpp.s
 
 # Help Target
 help:
@@ -169,14 +291,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... _catkin_empty_exported_target"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... telescope_controller"
+	@echo "... telescope_gencpp"
+	@echo "... telescope_generate_messages"
+	@echo "... telescope_generate_messages_cpp"
+	@echo "... telescope_generate_messages_lisp"
+	@echo "... telescope_generate_messages_py"
+	@echo "... telescope_genlisp"
+	@echo "... telescope_genpy"
 	@echo "... test"
+	@echo "... src/controller/server/telescope_controller.o"
+	@echo "... src/controller/server/telescope_controller.i"
+	@echo "... src/controller/server/telescope_controller.s"
 .PHONY : help
 
 

@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(telescope_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "" STREQUAL "")
+if(NOT "/home/rosmgr/quimal/devel/include" STREQUAL "")
   set(telescope_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/home/rosmgr/quimal/devel/include")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
@@ -122,7 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/rosmgr/quimal/devel/lib;/home/rosmgr/quimal/devel/lib;/home/rosmgr/ucn_workspace/devel/lib;/home/rosmgr/stdr_simulator/devel/lib;/home/rosmgr/turtlebot/devel/lib;/home/rosmgr/ros_catkin_ws/install_isolated/lib)
+    foreach(path /home/rosmgr/quimal/devel/lib;/home/rosmgr/quimal/devel/lib;/home/rosmgr/ros_catkin_ws/devel_isolated/move_base/lib;/home/rosmgr/ros_catkin_ws/install_isolated/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -145,7 +145,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(telescope_EXPORTED_TARGETS "")
+set(telescope_EXPORTED_TARGETS "telescope_generate_messages_cpp;telescope_generate_messages_lisp;telescope_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${telescope_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -153,7 +153,7 @@ foreach(t ${telescope_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "")
+set(depends "message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -182,7 +182,7 @@ foreach(depend ${depends})
   list(APPEND telescope_EXPORTED_TARGETS ${${telescope_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "telescope-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${telescope_DIR}/${extra})
