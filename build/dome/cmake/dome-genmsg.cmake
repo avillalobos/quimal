@@ -2,7 +2,7 @@
 
 message(STATUS "dome: 1 messages, 2 services")
 
-set(MSG_I_FLAGS "-Idome:/home/rosmgr/quimal/src/dome/msg;-Istd_msgs:/home/rosmgr/ros_catkin_ws/install_isolated/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Idome:/home/rosmgr/quimal/src/dome/msg;-Istd_msgs:/home/rosmgr/ros_catkin_ws/src/std_msgs/msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)

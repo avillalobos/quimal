@@ -3,81 +3,81 @@
 
 sensor/CMakeFiles/camera_server.dir/src/controller/camera_server.cpp.o
  /home/rosmgr/quimal/src/sensor/src/controller/camera_server.cpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/XmlRpcDecl.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/XmlRpcValue.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/cv_bridge/cv_bridge.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/camera_publisher.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/camera_subscriber.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/exception.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/image_transport.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/loader_fwds.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/publisher.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/single_subscriber_publisher.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/subscriber.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/image_transport/transport_hints.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/core.hpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/core_c.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/mat.hpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/operations.hpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/types_c.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/core/version.hpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/highgui/highgui.hpp
- /home/rosmgr/ros_catkin_ws/install_isolated/include/opencv2/highgui/highgui_c.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/advertise_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/advertise_service_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/assert.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/core.hpp
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/core_c.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/mat.hpp
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/operations.hpp
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/types_c.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/core/version.hpp
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/highgui/highgui.hpp
+ /home/rosmgr/ros_catkin_ws/devel_isolated/opencv2/include/opencv2/highgui/highgui_c.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/roscpp/include/ros/common.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/sensor_msgs/include/sensor_msgs/CameraInfo.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/sensor_msgs/include/sensor_msgs/Image.h
+ /home/rosmgr/ros_catkin_ws/devel_isolated/sensor_msgs/include/sensor_msgs/RegionOfInterest.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/builtin_message_traits.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/common.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/console.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/console_backend.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/datatypes.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/duration.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/exception.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/exceptions.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/forwards.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/init.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/macros.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/master.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/message.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/message_event.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/message_forward.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/message_operations.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/message_traits.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/names.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/node_handle.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/param.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/parameter_adapter.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/platform.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/publisher.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/rate.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/ros.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/roscpp_serialization_macros.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/rostime_decl.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/serialization.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/serialized_message.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service_callback_helper.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service_client.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service_client_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service_server.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/service_traits.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/single_subscriber_publisher.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/spinner.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/static_assert.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/subscribe_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/subscriber.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/subscription_callback_helper.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/this_node.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/time.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/timer.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/timer_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/topic.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/transport_hints.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/types.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/wall_timer.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/ros/wall_timer_options.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/rosconsole/macros_generated.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/sensor_msgs/CameraInfo.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/sensor_msgs/Image.h
- /home/rosmgr/ros_catkin_ws/install_isolated/include/sensor_msgs/RegionOfInterest.h
  /home/rosmgr/ros_catkin_ws/install_isolated/include/std_msgs/Header.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/camera_publisher.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/camera_subscriber.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/exception.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/image_transport.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/loader_fwds.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/publisher.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/single_subscriber_publisher.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/subscriber.h
+ /home/rosmgr/ros_catkin_ws/src/image_common/image_transport/include/image_transport/transport_hints.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/rosconsole/include/ros/assert.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/rosconsole/include/ros/console.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/rosconsole/include/ros/console_backend.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/rosconsole/include/ros/static_assert.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/rosconsole/include/rosconsole/macros_generated.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/advertise_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/advertise_service_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/exceptions.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/forwards.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/init.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/master.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/message.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/names.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/node_handle.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/param.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/parameter_adapter.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/publisher.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/ros.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/service.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/service_callback_helper.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/service_client.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/service_client_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/service_server.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/single_subscriber_publisher.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/spinner.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/subscribe_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/subscriber.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/subscription_callback_helper.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/this_node.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/timer.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/timer_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/topic.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/transport_hints.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/wall_timer.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/roscpp/include/ros/wall_timer_options.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/xmlrpcpp/include/XmlRpcDecl.h
+ /home/rosmgr/ros_catkin_ws/src/ros_comm/xmlrpcpp/include/XmlRpcValue.h
+ /home/rosmgr/ros_catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h

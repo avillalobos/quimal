@@ -314,8 +314,8 @@ clean: dome/CMakeFiles/dome_gencpp.dir/clean
 
 # All Build rule for target.
 dome/CMakeFiles/dome_generate_messages.dir/all: dome/CMakeFiles/dome_generate_messages_cpp.dir/all
-dome/CMakeFiles/dome_generate_messages.dir/all: dome/CMakeFiles/dome_generate_messages_py.dir/all
 dome/CMakeFiles/dome_generate_messages.dir/all: dome/CMakeFiles/dome_generate_messages_lisp.dir/all
+dome/CMakeFiles/dome_generate_messages.dir/all: dome/CMakeFiles/dome_generate_messages_py.dir/all
 	$(MAKE) -f dome/CMakeFiles/dome_generate_messages.dir/build.make dome/CMakeFiles/dome_generate_messages.dir/depend
 	$(MAKE) -f dome/CMakeFiles/dome_generate_messages.dir/build.make dome/CMakeFiles/dome_generate_messages.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/rosmgr/quimal/build/CMakeFiles 
