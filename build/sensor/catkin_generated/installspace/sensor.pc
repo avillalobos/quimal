@@ -1,8 +1,0 @@
-prefix=/home/rosmgr/quimal/install
-
-Name: sensor
-Description: Description of sensor
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/rosmgr/quimal/install/lib 
-Requires: 

@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "telescope")
-set(telescope_MAINTAINER "rosmgr <rosmgr@todo.todo>")
-set(telescope_DEPRECATED "")
-set(telescope_VERSION "0.0.0")
-set(telescope_BUILD_DEPENDS "message_generation" "roscpp" "std_msgs")
-set(telescope_RUN_DEPENDS "message_runtime" "roscpp" "rospy" "std_msgs")
-set(telescope_BUILDTOOL_DEPENDS "catkin")
