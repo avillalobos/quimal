@@ -34,38 +34,21 @@ using std::cerr;
 using std::endl;
 using std::vector;
 
-//static serial::Serial* my_serial;
-//static serial::Serial my_serial("/dev/null", 9600, serial::Timeout::simpleTimeout(1000));
-
-/*
-void chatterCallback(const std_msgs::String::ConstPtr& msg)
-{
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
-  // idealmente debería escribir la RA y DEC recibida y esperar un mensaje
-  size_t bytes_wrote = my_serial->write(msg->data.c_str());
-  string result = my_serial->read(msg->data.length()+1);
-  cout << "result: " <<  result << endl;
-}
-*/
-
-//
-// Telescope Info Section
-//
-
-//LX200::LX200(string device, int baud_rate, int timeout) : Telescope::Telescope(device, baud_rate, timeout){
 LX200::LX200(string device, int baud_rate, int timeout){
 	this->serial_device = new serial::Serial(device, baud_rate, serial::Timeout::simpleTimeout(timeout));
-/*
 	ros::NodeHandle n;
-        ros::ServiceServer get_info = n.advertiseService("getInfo", LX200::getInfo);
-        ros::ServiceServer set_dec = n.advertiseService("setDEC", setDEC);
-        ros::ServiceServer set_ra = n.advertiseService("setRA", setRA);
-        ros::ServiceServer set_slewrate = n.advertiseService("setSlewRate", setSlewRate);
-        ros::ServiceServer set_target = n.advertiseService("setTarget", setTarget);
-        ros::ServiceServer park = n.advertiseService("Park", Park);
-*/
+	ros::ServiceServer get_info = n.advertiseService("getInfo", &LX200::getInfo, this);
+	ros::ServiceServer set_slewrate = n.advertiseService("setSlewRate", &LX200::setSlewRate,this);
+	ros::ServiceServer set_target = n.advertiseService("setTarget", &LX200::setTarget,this);
+	ros::ServiceServer park = n.advertiseService("Park", &LX200::Park,this);
+	ros::ServiceServer stop = n.advertiseService("StopSlewing", &LX200::stopSlewing,this);
 }
 
+Telescope::~Telescope(){
+	delete this->serial_device;
+}
+
+// INFO Section
 
 telescope::TelescopeInfo LX200::getTelescopeInfo(){
 	ROS_INFO("Waiting for telescope status");
@@ -88,48 +71,95 @@ bool LX200::getInfo(telescope::getInfo::Request &req, telescope::getInfo::Respon
 	return true;
 }
 
+string LX200::getAltitud(){
+	ROS_INFO("Reading Altitud from telescope");
+	size_t bytes_wrote = this->serial_device->write(":GA#");
+	string result = this->serial_device->read(10);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	ROS_INFO("Telescope said Altitud = %s", result.c_str());
+	return result;
+}
+
+string LX200::getAzimut(){
+	ROS_INFO("Reading Azimut from telescope");
+	size_t bytes_wrote= this->serial_device->write(":GZ#");
+	string result = this->serial_device->read(10);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	ROS_INFO("Telescope said Azimut = %s", result.c_str());
+	return result;
+}
+
+string LX200::getSidereal(){
+	ROS_INFO("Reading Sidereal from telescope");
+	size_t bytes_wrote = this->serial_device->write(":GS#");
+	string result = this->serial_device->read(10);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	ROS_INFO("Telescope said Sidereal = %s", result.c_str());
+	return result;
+}
+
 //
 // DEC Section
 //
 
 string LX200::readDEC(){
-	cout << "Si esto fuera el serial, para leer el RA escribiría:" << "#:GD#" << endl;
-	//my_serial->write("#:GD#")
-	//string result = my_serial->read(200)
-	return "+90:12:23";
+	ROS_INFO("Reading DEC from telescope");
+	size_t bytes_wrote = this->serial_device->write(":GD#");
+	string result = this->serial_device->read(10);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	ROS_INFO("Telescope said DEC = %s", result.c_str());
+	return result;
 }
 
 bool LX200::writeDEC(string DEC){
-
+	string cmd = ":Sd" + DEC + "#";
+	size_t bytes_wrote = this->serial_device->write(cmd.c_str());
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	string result = this->serial_device->read(1);
+	cout << "DEC Accepted?: " << result << endl;
+	if (result[0] == '1'){
+		return true;
+		ROS_INFO("DEC %s has been accepted",DEC.c_str());
+	}else{
+		ROS_INFO("DEC %s has been rejected",DEC.c_str());
+		return false;
+	}
 }
 
-bool LX200::setDEC(telescope::setDEC::Request &req, telescope::setDEC::Response &res){
-  	ROS_INFO("A DEC set has been requested: %s", req.DEC.c_str());
-	ROS_INFO("Sending command to telescope");
-	res.status = getTelescopeInfo();
-	ROS_INFO("setDEC has been finished successfully");
-	return true;
-}
-
+//
+// RA Section
+//
 
 string LX200::readRA(){
-	cout << "Si esto fuera el serial, para leer el RA escribiría:" << "#:GR#" << endl;
-        //my_serial->write("#:GR#")
-        //string result = my_serial->read(200)
-	return "12:23:34";
+	size_t bytes_wrote = this->serial_device->write("#:GR#");
+	string result = this->serial_device->read(9);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	ROS_INFO("Telescope said RA = %s", result.c_str());
+	return result;
 }
 
-bool LX200::setRA(telescope::setRA::Request &req, telescope::setRA::Response &res){
-  	ROS_INFO("A RA set has been requested: %s", req.RA.c_str());
-	ROS_INFO("Sending command to telescope");
-	res.status = getTelescopeInfo();
-	ROS_INFO("setRA has been finished successfully");
-	return true;
+bool LX200::writeRA(string RA){
+	string cmd = ":Sr " + RA +"#";
+	cout << "cmd : " << cmd << endl;
+	size_t bytes_wrote = this->serial_device->write(cmd.c_str());
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	string result = this->serial_device->read(1);
+	cout << "resultado : " <<result << endl;
+	if (result[0] == '1'){
+		return true;
+		ROS_INFO("DEC %s has been accepted",RA.c_str());
+	}else{
+		ROS_INFO("DEC %s has been rejected",RA.c_str());
+		return false;
+	}
 }
 
 bool LX200::setSlewRate(telescope::setSlewRate::Request &req, telescope::setSlewRate::Response &res){
   	ROS_INFO("A SlewRate set has been requested: %s", req.slew.c_str());
 	ROS_INFO("Sending command to telescope");
+	string cmd = ":R"+req.slew + "#";
+	size_t bytes_wrote = this->serial_device->write(cmd);
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
 	res.status = getTelescopeInfo();
 	ROS_INFO("setSlewRate has been finished successfully");
 	return true;
@@ -138,6 +168,13 @@ bool LX200::setSlewRate(telescope::setSlewRate::Request &req, telescope::setSlew
 bool LX200::setTarget(telescope::setTarget::Request &req, telescope::setTarget::Response &res){
   	ROS_INFO("A new Target has been requested: RA=%s | DEC=%s", req.RA.c_str(), req.DEC.c_str());
 	ROS_INFO("Sending command to telescope");
+	writeRA(req.RA);
+	writeDEC(req.DEC);
+	ROS_INFO("Executing selected target");
+	this->serial_device->write(":MS#");
+	//TODO modify this to allow better understanding
+	string asdf = this->serial_device->read(200);
+	cout << "asdf: " << asdf << endl;
 	res.status = getTelescopeInfo();
 	ROS_INFO("The new target has sent successfully to the telescope");
 	return true;
@@ -147,8 +184,9 @@ bool LX200::setTarget(telescope::setTarget::Request &req, telescope::setTarget::
 bool LX200::Park(telescope::Park::Request &req, telescope::Park::Response &res){
   	ROS_INFO("TCS Requested to Park the telescope!");
 	ROS_INFO("Sending command to telescope");
-	cout << "Si esto fuera el serial, esto escribiria" << ":KA#" << endl;
-	while( isParking()){
+	size_t bytes_wrote = this->serial_device->write("#:hP#");
+	ROS_INFO("Driver wrote %lu bytes", bytes_wrote);
+	while( isParking() ){
 		usleep(10000);
 	}
 	// If telescope finish the parking ,then execute the endPark()
@@ -162,37 +200,33 @@ bool LX200::Park(telescope::Park::Request &req, telescope::Park::Response &res){
 bool LX200::isParking(){
 	ROS_INFO("Checking parking state");
 	cout << "Si esto fuera serial, escribiria esto para saber si terminó de parkear" << ":D#" << endl;
+	this->serial_device->write(":D#");
 	return false;
 }
 
 bool LX200::endPark(){
 	ROS_INFO("Parking finished, sending endParking to mount");
 	cout << "Si esto fuera serial, escribiria esto para saber si terminó de parkear" << ":AL#" << endl;
+	this->serial_device->write(":AL#");
+	return true;
+}
+
+bool LX200::stopSlewing(telescope::StopSlewing::Request &req, telescope::Park::Response &res){
+	ROS_INFO("Slewing of telescope has been requested to stop!");
+	this->serial_device->write(":Q#");
+	ROS_INFO("Stop command has been sent to Telescope");
+	res.status = getTelescopeInfo();
+	return true;
 }
 
 int main(int argc, char **argv)
 {
-
-	LX200 driver = LX200("/dev/null", 9600, 1000);
-	ros::init(argc, argv, "telescope_controller");
-	//ros::Subscriber sub = n.subscribe("telescope_parameters", 1000, chatterCallback);
-	ros::NodeHandle n;
-	ros::ServiceServer get_info = n.advertiseService("getInfo", &driver.getInfo);
-	ros::ServiceServer set_dec = n.advertiseService("setDEC", driver.setDEC);
-	ros::ServiceServer set_ra = n.advertiseService("setRA", driver.setRA);
-	ros::ServiceServer set_slewrate = n.advertiseService("setSlewRate", driver.setSlewRate);
-	ros::ServiceServer set_target = n.advertiseService("setTarget", driver.setTarget);
-	ros::ServiceServer park = n.advertiseService("Park", driver.Park);
-/*
-  my_serial = new serial::Serial("/dev/null", 9600, serial::Timeout::simpleTimeout(1000));
-  cout << "Is the serial port open?";
-  if(my_serial->isOpen())
-    cout << " Yes." << endl;
-  else{
-    cout << " No." << endl;
-    return 0;
-  }
-*/
-  ros::spin();
+	if(argc < 2){
+		cout << "You must indicate the device and the baud rate, timeout for usb is 1s by default" << endl;
+	}else{
+		LX200 driver = LX200(argv[1], atoi(argv[2]), 1000);
+		ros::init(argc, argv, "telescope_controller");
+		ros::spin();
+	}
   return 0;
 }
