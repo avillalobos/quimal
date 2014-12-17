@@ -1,8 +1,0 @@
-prefix=/home/rosmgr/quimal/devel
-
-Name: dome
-Description: Description of dome
-Version: 0.0.0
-Cflags: -I/home/rosmgr/quimal/devel/include
-Libs: -L/home/rosmgr/quimal/devel/lib 
-Requires: message_runtime
