@@ -16,3 +16,7 @@ def close_dome(speed):
 def emergency_stop():
 	global dome_controller_client
 	return dome_controller_client.emergency_stop()
+
+def getSiderealTime(eLong):
+	global dome_controller_client
+	return dome_controller_client.getSiderealTime(eLong)

@@ -16,6 +16,7 @@ import cv2
 import numpy as np
 import dome_controller_UI 
 import sys, os
+from math import pi as PI
 sys.path.append(os.path.abspath((os.path.dirname(__file__) + "/../../controller/")))
 import controller as controller
 import rospy
@@ -47,7 +48,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		rospy.init_node("dome_controller_client")
 		rospy.Subscriber("dome/roof/status", roof, self.updateSensorStatus)
 		self.image_data = None
-		rospy.Subscriber("/camera/image/compressed", Image, self.image_callback,  queue_size = 5)
+		rospy.Subscriber("camera", Image, self.image_callback,  queue_size = 5)
 	
 		self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
 		self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
@@ -59,6 +60,12 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		self.clock_timer = QTimer(self)
 		self.clock_timer.timeout.connect(self.update_lcd_time)
 		self.clock_timer.start(1000)
+	
+		# i'm using as reference UT3 @ Paranal Observatory
+		deg = 70
+		minutes = 24
+		seconds = 9.896
+		self.longitude = -(deg + minutes / 60 + seconds / 3600) * (PI/180.0)
 
 	def create_tableview(self):
 		self.sensor_display = SensorTableModel(5,3,self.centralwidget)
@@ -73,7 +80,8 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		utc_time = datetime.datetime.utcnow()
 		text = utc_time.strftime("%H:%M:%S")
 		self.lcd_local_time.display(text)
-		self.lcd_sideral_time.display(text)
+		
+		self.lcd_sideral_time.display(controller.getSiderealTime(self.longitude))
 
 	def updateSensorStatus(self, data):
 		self.sensor_display.updateSensorData("Sensor 1", "Warning", data.ubication)
@@ -124,7 +132,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 
 	def _get_new_image(self):
 		if self.image_data != None:
-			qimage = QtGui.QImage(self.image_data,200,200, QtGui.QImage.Format_RGB888)
+			qimage = QtGui.QImage(self.image_data,640,480, QtGui.QImage.Format_RGB888)
 			myPixmap = QtGui.QPixmap(qimage)
 			if myPixmap != None and not myPixmap.isNull(): 
 				myScaledPixmap = myPixmap.scaled(self.camera_view.size(), QtCore.Qt.KeepAspectRatio)
@@ -133,7 +141,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 					self.camera_view.setPixmap(myScaledPixmap)
 
 	def image_callback(self, ros_data):
-		print "image received", ros_data
+		#print "image received", ros_data
 		#### direct conversion to CV2 ####
 		np_arr = np.fromstring(str(ros_data.data), np.uint8)
 		self.image_data = np_arr

@@ -14,9 +14,9 @@ import numpy as np
 class image_converter:
 
   def __init__(self):
-    self.image_pub = rospy.Publisher("/camera/image/compressed",Image)
+    self.image_pub = rospy.Publisher("camera",Image)
     self.camera = picamera.PiCamera()
-    self.camera.resolution = (200, 200)
+    self.camera.resolution = (640, 480)
     self.bridge = CvBridge()
 
   def publish(self):

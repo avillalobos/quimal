@@ -2,6 +2,10 @@
 
 import sys
 import rospy
+#for sidereal values
+import datetime as dt
+import pytz
+import sidereal
 from dome.srv import *
 from dome.msg import *
 
@@ -39,3 +43,11 @@ class DomeControllerClient:
 		roof_emergency_msg.sensor3 = False
 		roof_emergency_msg.state = "EMERGENCY_STOP"
 		self.pub.publish(roof_emergency_msg)
+
+	def getSiderealTime(self,eLong):
+		t = dt.datetime.now(pytz.UTC)
+		gst = sidereal.SiderealTime.fromDatetime(t)
+		lst_str = str(gst.lst(eLong)).translate(None, '[]hms').split(' ')
+		sidereal_time = dt.datetime(t.year, t.month, t.day, int(lst_str[0]), int(lst_str[1]), int(float(lst_str[2])))
+		#return lst_str[0]+":"+lst_str[1]+":"+lst_str[2]
+		return sidereal_time.strftime("%H:%M:%S")
