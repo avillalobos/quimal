@@ -85,7 +85,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 
 	def updateSensorStatus(self, data):
 		self.sensor_display.updateSensorData("Sensor 1", "Warning", data.ubication)
-		self.sensor_display.updateSensorData("Sensor 2", "Critical", data.state)
+		self.sensor_display.updateSensorData("Sensor 2", "Critical", data.action + " -> " + data.state)
 		self.sensor_display.updateSensorData("Sensor 3", "Ok", data.sensor1)
 		
 	def threaded_open_dome(self, empty):
