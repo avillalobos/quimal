@@ -104,7 +104,6 @@ class DomeController(SuperController):
 				break;
 			msg = self.readLineFromArduino()
 			msg = self.parseArduinoLecture(msg)
-			print msg
 
 		rospy.loginfo("Roof status: " + msg["status"])
 		if emergency_stop == False:
