@@ -1,6 +1,9 @@
 float32 ubication
-bool sensor1
-bool sensor2
-bool sensor3
+bool open_button
+bool close_button
+bool opening_sensor
+bool closing_sensor
+bool safety_sensor
+bool meteorologic_sensor
 string state
 string action

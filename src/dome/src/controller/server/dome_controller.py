@@ -2,7 +2,7 @@
 
 from dome.srv import *
 from dome.msg import roof
-import rospy, time, serial, os.path
+import rospy, time, serial, os.path, sys
 from super_controller import SuperController
 from subprocess import call
 
@@ -10,15 +10,15 @@ class DomeController(SuperController):
 
 #=================================================================================================
 
-	def __init__(self):
+	def __init__(self,device_name):
+		self.roof_status = None
 		rospy.init_node('ROOF_Controller')
-		super(DomeController,self).__init__("ttyACM0")
+		super(DomeController,self).__init__(device_name)
 		self.pub = rospy.Publisher('dome/roof/status', roof, queue_size=100)
 		rospy.Subscriber("dome/roof/status", roof, self.callback)
 		# useful only on Raspberry PI
 		self.status_pin = 18
 		roof_initial_msg = self.getInitialState()
-		self.roof_status = None
 		self.last_roof_status = None
 		while self.roof_status == None:
 			rospy.loginfo("waiting to store first message of roof status")
@@ -29,27 +29,26 @@ class DomeController(SuperController):
 # UTILS
 #=================================================================================================
 
-	def createRoofMSG(self,action,status, sensor1, sensor2, sensor3, ubication):
+	def createRoofMSG(self,msgs_list):
 		roof_msg = roof()
-		roof_msg.ubication = ubication
-		roof_msg.sensor1 = True
-		roof_msg.sensor2 = False
- 		roof_msg.sensor3 = True
- 		roof_msg.state = status
-		roof_msg.action = action
+		roof_msg.open_button = bool(msgs_list["open_button"])
+		roof_msg.close_button = bool(msgs_list["close_button"])
+		roof_msg.opening_sensor = bool(msgs_list["opening_sensor"])
+ 		roof_msg.closing_sensor = bool(msgs_list["closing_sensor"])
+		roof_msg.safety_sensor = bool(msgs_list["safety_sensor"])
+		roof_msg.meteorologic_sensor = bool(msgs_list["meteorologic_sensor"])
+ 		roof_msg.state = msgs_list["status"]
+		roof_msg.action = msgs_list["action"]
 		return roof_msg
 
 	# this code must be programated with the electronics and mechanical team.
 	def getInitialState(self):
 		roof_initial_msg = roof()
-		roof_initial_msg.ubication = 0
-		roof_initial_msg.sensor1 = False
-		roof_initial_msg.sensor2 = False
-		roof_initial_msg.sensor3 = False
 		# This make a change on the pin status so that the interruption will be triggered and a message will be sent by Serial port
 		self.blinkGPIO()
-		state = self.readLineFromArduino()
-		roof_initial_msg.state = state
+		# raw lecture from the arduino
+		hardware_info = self.readLineFromArduino()
+		roof_initial_msg = self.createRoofMSG(self.parseArduinoLecture(hardware_info))
 		self.pub.publish(roof_initial_msg)
 		return roof_initial_msg
 	
@@ -86,18 +85,22 @@ class DomeController(SuperController):
 		roof_msg = roof()
 		msg = self.arduino.write("openDome")
 		msg = self.readLineFromArduino()
+		msg = self.parseArduinoLecture(msg)
 		emergency_stop = False
-		while msg != "FINISH" and msg != "ABORTED":
+		while msg["status"] != "FINISH" and msg["status"] != "ABORTED":
 			if self.roof_status.state != self.STATES["EMERGENCY_STOP"]:
-				roof_msg = self.createRoofMSG("openDome",msg,True,False,True,1)
+				roof_msg = self.createRoofMSG(msg)
 				self.pub.publish(roof_msg)
 				self.rate.sleep()
 			else:
 				rospy.logwarn("Due an Emergency stop message, the opening of the dome has been stopped!")
 				emergency_stop = True
 				break;
-			msg = self.readLineFromArduino()	
-		rospy.loginfo("Roof status: " + msg)
+			msg = self.readLineFromArduino()
+			msg = self.parseArduinoLecture(msg)
+			print msg
+
+		rospy.loginfo("Roof status: " + msg["status"])
 		if emergency_stop == False:
 		# getting the last message
 			msg = self.readLineFromArduino().split(":")
@@ -127,10 +130,11 @@ class DomeController(SuperController):
 	def action_close_dome(self):
 		msg = self.arduino.write("closeDome")
 		msg = self.readLineFromArduino()
+		msg = self.parseArduinoLecture(msg)
 		emergency_stop = False
-		while msg != "FINISH" and msg != "ABORTED":
+		while msg["status"] != "FINISH" and msg["status"] != "ABORTED":
 			if self.roof_status.state != self.STATES["EMERGENCY_STOP"]:
-				roof_msg = self.createRoofMSG("closeDome",msg,False,True,False,1)
+				roof_msg = self.createRoofMSG(msg)
 				self.pub.publish(roof_msg)
 				self.rate.sleep()
 			else:
@@ -138,7 +142,9 @@ class DomeController(SuperController):
 				emergency_stop = True
 				break;
 			msg = self.readLineFromArduino()
-		rospy.loginfo("Roof status: " + msg)
+			msg = self.parseArduinoLecture(msg)
+			
+		rospy.loginfo("Roof status: " + msg["status"])
 		if emergency_stop == False:
 		# getting the last message
 			msg = self.readLineFromArduino().split(":")
@@ -159,5 +165,8 @@ class DomeController(SuperController):
 #=================================================================================================
 
 if __name__ == "__main__":
-	dome_controller = DomeController()
-	dome_controller.server()
+	if len(sys.argv) == 2:
+		dome_controller = DomeController(sys.argv[1])
+		dome_controller.server()
+	else:
+		print "You should indicate the device name as a parameter"
