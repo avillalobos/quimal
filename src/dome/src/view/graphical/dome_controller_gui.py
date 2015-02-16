@@ -68,7 +68,7 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		self.longitude = -(deg + minutes / 60 + seconds / 3600) * (PI/180.0)
 
 	def create_tableview(self):
-		self.sensor_display = SensorTableModel(5,3,self.centralwidget)
+		self.sensor_display = SensorTableModel(7,3,self.centralwidget)
 		self.sensor_display.setDragDropOverwriteMode(False)
 		self.sensor_display.setGeometry(QtCore.QRect(460, 120, 431, 361))
 		self.sensor_display.setObjectName(_fromUtf8("sensor_display"))
@@ -84,9 +84,26 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		self.lcd_sideral_time.display(controller.getSiderealTime(self.longitude))
 
 	def updateSensorStatus(self, data):
-		self.sensor_display.updateSensorData("Sensor 1", "Warning", data.ubication)
-		self.sensor_display.updateSensorData("Sensor 2", "Critical", data.action + " -> " + data.state)
-		self.sensor_display.updateSensorData("Sensor 3", "Ok", data.sensor1)
+		#TODO usar los valores para determinar si el estado esta bien o mal
+		self.sensor_display.updateSensorData("Ubication", "0", data.ubication)
+		
+		if data.open_button and data.state != "REMOTE":
+			self.sensor_display.updateSensorData("Open Button", "Critical", data.open_button)
+		else:
+			self.sensor_display.updateSensorData("Open Button", "Ok", data.open_button)
+		
+		if data.close_button and data.state != "REMOTE":
+			self.sensor_display.updateSensorData("Close Button", "Critical", data.close_button)
+		else:
+			self.sensor_display.updateSensorData("Close Button", "0", data.close_button)
+		
+		
+		self.sensor_display.updateSensorData("Opening Sensor", "Ok", data.opening_sensor)
+		self.sensor_display.updateSensorData("Closing Sensor", "Ok", data.closing_sensor)
+		self.sensor_display.updateSensorData("Safety Sensor", "Ok", data.safety_sensor)
+		self.sensor_display.updateSensorData("Meteorologic Sensor", "Ok", data.meteorologic_sensor)
+		self.lbl_status.setText(data.state)
+		self.lbl_next_action.setText(data.action)
 		
 	def threaded_open_dome(self, empty):
 		print "opening"

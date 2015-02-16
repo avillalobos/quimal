@@ -6,7 +6,7 @@ from PyQt4.QtGui import *
 class SensorTableModel(QTableWidget):
 	def __init__(self, *args):
 		QTableWidget.__init__(self, *args)
-		self.data = {'Sensor Name':['Sensor 1','Sensor 2','Sensor 3'], 'Status':['Warning','Critical','Ok'], 'Value':['7','8','9']}
+		self.data = {'Sensor Name':['Ubication','Open Button','Close Button', 'Opening Sensor', 'Closing Sensor', 'Safety Sensor', 'Meteorologic Sensor'], 'Status':['Uknown','Off','Off', 'Off','Off','Off','Off'], 'Value':['0','0','0','0','0','0','0']}
 		self.setmydata()
 		#self.resizeColumnsToContents()
 		#self.resizeRowsToContents()

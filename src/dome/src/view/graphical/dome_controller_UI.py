@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'tcs_gui.ui'
 #
-# Created: Fri Nov 14 00:42:18 2014
+# Created: Mon Feb 16 00:06:27 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -57,7 +57,7 @@ class Ui_TCS_Main_Panel(object):
         self.sensor_display.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.sensor_display.setObjectName(_fromUtf8("sensor_display"))
         self.camera_view = QtGui.QLabel(self.centralwidget)
-        self.camera_view.setGeometry(QtCore.QRect(30, 40, 400, 400))
+        self.camera_view.setGeometry(QtCore.QRect(30, 70, 400, 400))
         self.camera_view.setObjectName(_fromUtf8("camera_view"))
         self.lcd_local_time = QtGui.QLCDNumber(self.centralwidget)
         self.lcd_local_time.setGeometry(QtCore.QRect(760, 40, 131, 41))
@@ -94,6 +94,28 @@ class Ui_TCS_Main_Panel(object):
         self.lbl_local_time.setGeometry(QtCore.QRect(670, 50, 80, 22))
         self.lbl_local_time.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lbl_local_time.setObjectName(_fromUtf8("lbl_local_time"))
+        self.lbl_next_action = QtGui.QLabel(self.centralwidget)
+        self.lbl_next_action.setGeometry(QtCore.QRect(260, 20, 190, 30))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lbl_next_action.setFont(font)
+        self.lbl_next_action.setObjectName(_fromUtf8("lbl_next_action"))
+        self.lbl_status = QtGui.QLabel(self.centralwidget)
+        self.lbl_status.setGeometry(QtCore.QRect(20, 20, 190, 30))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lbl_status.setFont(font)
+        self.lbl_status.setObjectName(_fromUtf8("lbl_status"))
+        self.lbl_status_title = QtGui.QLabel(self.centralwidget)
+        self.lbl_status_title.setGeometry(QtCore.QRect(90, 0, 54, 15))
+        self.lbl_status_title.setObjectName(_fromUtf8("lbl_status_title"))
+        self.lbl_next_action_title = QtGui.QLabel(self.centralwidget)
+        self.lbl_next_action_title.setGeometry(QtCore.QRect(320, 0, 81, 20))
+        self.lbl_next_action_title.setObjectName(_fromUtf8("lbl_next_action_title"))
         TCS_Main_Panel.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(TCS_Main_Panel)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 901, 21))
@@ -122,4 +144,8 @@ class Ui_TCS_Main_Panel(object):
         self.start_date_label_2.setText(_translate("TCS_Main_Panel", "End", None))
         self.lbl_sideral_time.setText(_translate("TCS_Main_Panel", "Sidereal Time", None))
         self.lbl_local_time.setText(_translate("TCS_Main_Panel", "UTC Time", None))
+        self.lbl_next_action.setText(_translate("TCS_Main_Panel", "TextLabel", None))
+        self.lbl_status.setText(_translate("TCS_Main_Panel", "TextLabel", None))
+        self.lbl_status_title.setText(_translate("TCS_Main_Panel", "STATUS", None))
+        self.lbl_next_action_title.setText(_translate("TCS_Main_Panel", "NEXT ACTION", None))
 

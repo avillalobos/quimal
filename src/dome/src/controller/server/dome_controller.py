@@ -29,14 +29,20 @@ class DomeController(SuperController):
 # UTILS
 #=================================================================================================
 
+	def str2bool(self,value):
+		if value == '1':
+			return True
+		if value == '0':
+			return False
+
 	def createRoofMSG(self,msgs_list):
 		roof_msg = roof()
-		roof_msg.open_button = bool(msgs_list["open_button"])
-		roof_msg.close_button = bool(msgs_list["close_button"])
-		roof_msg.opening_sensor = bool(msgs_list["opening_sensor"])
- 		roof_msg.closing_sensor = bool(msgs_list["closing_sensor"])
-		roof_msg.safety_sensor = bool(msgs_list["safety_sensor"])
-		roof_msg.meteorologic_sensor = bool(msgs_list["meteorologic_sensor"])
+		roof_msg.open_button = self.str2bool(msgs_list["open_button"])
+		roof_msg.close_button = self.str2bool(msgs_list["close_button"])
+		roof_msg.opening_sensor = self.str2bool(msgs_list["opening_sensor"])
+ 		roof_msg.closing_sensor = self.str2bool(msgs_list["closing_sensor"])
+		roof_msg.safety_sensor = self.str2bool(msgs_list["safety_sensor"])
+		roof_msg.meteorologic_sensor = self.str2bool(msgs_list["meteorologic_sensor"])
  		roof_msg.state = msgs_list["status"]
 		roof_msg.action = msgs_list["action"]
 		return roof_msg
