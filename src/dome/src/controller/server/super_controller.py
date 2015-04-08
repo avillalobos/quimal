@@ -28,7 +28,10 @@ class SuperController(object):
 		msg_dict = dict()
 		index = 0
 		for raw_data in msgs_list:
-			msg_dict[self.data_from_arduino[index]] = raw_data
+			try:
+				msg_dict[self.data_from_arduino[index]] = raw_data
+			except KeyError, e:
+				rospy.loginfo("Key: " + str(self.data_from_arduino[index]) + "Not found")
 			index+=1
 		return msg_dict
 

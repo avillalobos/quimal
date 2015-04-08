@@ -34,6 +34,16 @@ class DomeControllerClient:
 		except rospy.ServiceException, e:
 			print "Service call failed: %s", e
 
+	def try_refresh_dome_status(self):
+		rospy.wait_for_service('refresh_dome_status')
+		try:
+			refresh_dome_status_srv = rospy.ServiceProxy('refresh_dome_status', update_status)
+			roof_msg = refresh_dome_status_srv()
+			return roof_msg
+		except rospy.ServiceException, e:
+			print "Service call failed: %s", e
+
+	#TODO implement the emergency stop function
 	def emergency_stop(self):
 		# Added some fake information, just to send the Emergency Stop command
 		roof_emergency_msg = roof()

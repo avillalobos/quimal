@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>901</width>
+    <width>1000</width>
     <height>628</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="Start_Stop">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>880</x>
       <y>520</y>
       <width>94</width>
       <height>24</height>
@@ -30,9 +30,9 @@
    <widget class="QPlainTextEdit" name="LogMonitor">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>490</y>
-      <width>801</width>
+      <width>861</width>
       <height>101</height>
      </rect>
     </property>
@@ -55,7 +55,7 @@
    <widget class="QPushButton" name="open_dome_btn">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>530</x>
       <y>0</y>
       <width>94</width>
       <height>24</height>
@@ -68,7 +68,7 @@
    <widget class="QPushButton" name="close_dome_btn">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>640</x>
       <y>0</y>
       <width>94</width>
       <height>24</height>
@@ -81,11 +81,16 @@
    <widget class="QPushButton" name="emergency_stop_btn">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>630</x>
       <y>30</y>
       <width>111</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Emergency Stop!</string>
@@ -94,9 +99,9 @@
    <widget class="QTableView" name="sensor_display">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>520</x>
       <y>120</y>
-      <width>431</width>
+      <width>461</width>
       <height>361</height>
      </rect>
     </property>
@@ -123,7 +128,7 @@
    <widget class="QLCDNumber" name="lcd_local_time">
     <property name="geometry">
      <rect>
-      <x>760</x>
+      <x>850</x>
       <y>40</y>
       <width>131</width>
       <height>41</height>
@@ -142,7 +147,7 @@
    <widget class="QDateEdit" name="dateEdit">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>710</x>
       <y>90</y>
       <width>110</width>
       <height>23</height>
@@ -152,7 +157,7 @@
    <widget class="QDateEdit" name="dateEdit_2">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>870</x>
       <y>90</y>
       <width>110</width>
       <height>23</height>
@@ -162,7 +167,7 @@
    <widget class="QPushButton" name="btn_generate_log">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>550</x>
       <y>90</y>
       <width>95</width>
       <height>24</height>
@@ -175,7 +180,7 @@
    <widget class="QLabel" name="start_date_label">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>670</x>
       <y>90</y>
       <width>41</width>
       <height>21</height>
@@ -188,7 +193,7 @@
    <widget class="QLabel" name="start_date_label_2">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>830</x>
       <y>90</y>
       <width>41</width>
       <height>21</height>
@@ -201,7 +206,7 @@
    <widget class="QLCDNumber" name="lcd_sideral_time">
     <property name="geometry">
      <rect>
-      <x>760</x>
+      <x>850</x>
       <y>0</y>
       <width>131</width>
       <height>41</height>
@@ -220,7 +225,7 @@
    <widget class="QLabel" name="lbl_sideral_time">
     <property name="geometry">
      <rect>
-      <x>659</x>
+      <x>749</x>
       <y>10</y>
       <width>91</width>
       <height>22</height>
@@ -236,7 +241,7 @@
    <widget class="QLabel" name="lbl_local_time">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>760</x>
       <y>50</y>
       <width>80</width>
       <height>22</height>
@@ -315,13 +320,31 @@
      <string>NEXT ACTION</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_refresh_status">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>30</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Refresh</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>901</width>
+     <width>1000</width>
      <height>21</height>
     </rect>
    </property>
@@ -369,7 +392,7 @@
    <slot>emergency_stop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>610</x>
+     <x>630</x>
      <y>101</y>
     </hint>
     <hint type="destinationlabel">
@@ -385,12 +408,28 @@
    <slot>generate_log()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>488</x>
-     <y>125</y>
+     <x>550</x>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>392</x>
      <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_refresh_status</sender>
+   <signal>clicked()</signal>
+   <receiver>TCS_Main_Panel</receiver>
+   <slot>refresh_dome_status()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>534</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>486</x>
+     <y>102</y>
     </hint>
    </hints>
   </connection>
@@ -400,5 +439,6 @@
   <slot>close_dome()</slot>
   <slot>emergency_stop()</slot>
   <slot>generate_log()</slot>
+  <slot>refresh_dome_status()</slot>
  </slots>
 </ui>

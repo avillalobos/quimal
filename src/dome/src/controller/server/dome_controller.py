@@ -32,25 +32,59 @@ class DomeController(SuperController):
 	def str2bool(self,value):
 		if value == '1':
 			return True
-		if value == '0':
+		elif value == '0':
+			return False
+		else:
 			return False
 
 	def createRoofMSG(self,msgs_list):
 		roof_msg = roof()
-		roof_msg.open_button = self.str2bool(msgs_list["open_button"])
-		roof_msg.close_button = self.str2bool(msgs_list["close_button"])
-		roof_msg.opening_sensor = self.str2bool(msgs_list["opening_sensor"])
- 		roof_msg.closing_sensor = self.str2bool(msgs_list["closing_sensor"])
-		roof_msg.safety_sensor = self.str2bool(msgs_list["safety_sensor"])
-		roof_msg.meteorologic_sensor = self.str2bool(msgs_list["meteorologic_sensor"])
- 		roof_msg.state = msgs_list["status"]
-		roof_msg.action = msgs_list["action"]
+		try:
+			roof_msg.open_button = self.str2bool(msgs_list["open_button"])
+		except KeyError, e:
+			rospy.loginfo("Unable to find key open_button from msg received by Arduino")
+			roof_msg.open_button = False
+		try:
+			roof_msg.close_button = self.str2bool(msgs_list["close_button"])
+		except KeyError, e:
+			rospy.loginfo("Unable to find key close_button from msg received by Arduino")
+			roof_msg.close_button = False
+		try:
+			roof_msg.opening_sensor = self.str2bool(msgs_list["opening_sensor"])
+		except KeyError, e:
+			rospy.loginfo("Unable to find key opening_sensor from msg received by Arduino")
+			roof_msg.opening_sensor = False
+		try:
+ 			roof_msg.closing_sensor = self.str2bool(msgs_list["closing_sensor"])
+ 		except KeyError, e:
+			rospy.loginfo("Unable to find key closing_sensor from msg received by Arduino")
+			roof_msg.closing_sensor = False
+		try:
+			roof_msg.safety_sensor = self.str2bool(msgs_list["safety_sensor"])
+		except KeyError, e:
+			rospy.loginfo("Unable to find key safety_sensor from msg received by Arduino")
+			roof_msg.safety_sensor = False
+		try:
+			roof_msg.meteorologic_sensor = self.str2bool(msgs_list["meteorologic_sensor"])
+		except KeyError, e:
+			rospy.loginfo("Unable to find key meteorologic_sensor from msg received by Arduino")
+			roof_msg.meteorologic_sensor = False
+		try:
+ 			roof_msg.state = msgs_list["status"]
+ 		except KeyError, e:
+			rospy.loginfo("Unable to find key status from msg received by Arduino")
+			roof_msg.state = "No status recived"
+		try:
+			roof_msg.action = msgs_list["action"]
+		except KeyError, e:
+			rospy.loginfo("Unable to find key action from msg received by Arduino")
+			roof_msg.action = "No action received"
 		return roof_msg
 
 	# this code must be programated with the electronics and mechanical team.
 	def getInitialState(self):
 		roof_initial_msg = roof()
-		# This make a change on the pin status so that the interruption will be triggered and a message will be sent by Serial port
+		# This make a change on the pin status so that the interruption will be triggered and a message will be received by Serial port
 		self.blinkGPIO()
 		# raw lecture from the arduino
 		hardware_info = self.readLineFromArduino()
@@ -158,10 +192,26 @@ class DomeController(SuperController):
 			rospy.logwarn("Executing emergency stop")
 		return roof_msg
 
+	# perform the actions to open the dome
+	def handle_refresh_dome_status(self,req):
+		rospy.loginfo("A new request of refresh have been received" + str(req))
+		roof_msg = roof()
+		# if this is not running under Raspberry PI, will just write by the serial port the command 'status'
+		self.blinkGPIO()
+		msg = self.readLineFromArduino()
+		msg = self.parseArduinoLecture(msg)
+		roof_msg = self.createRoofMSG(msg)
+		self.pub.publish(roof_msg)
+		rospy.loginfo("Roof status: " + roof_msg.state)
+		return roof_msg
+
+
+
 	# Start the server to answer the different services handled	
 	def server(self):
 		s1 = rospy.Service('open_dome', open_dome, self.handle_open)
 		s2 = rospy.Service('close_dome', close_dome, self.handle_close)
+		s3 = rospy.Service('refresh_dome_status', update_status , self.handle_refresh_dome_status)
 		rospy.loginfo("ready to go!.")
 		rospy.spin()
 

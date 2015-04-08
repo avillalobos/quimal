@@ -104,22 +104,14 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		self.sensor_display.updateSensorData("Meteorologic Sensor", "Ok", data.meteorologic_sensor)
 		self.lbl_status.setText(data.state)
 		self.lbl_next_action.setText(data.action)
-		
-	def threaded_open_dome(self, empty):
-		print "opening"
-		roof_msg = controller.open_dome(speed=1)
-		if self.StartStop == True:
-			self.LogMonitor.appendPlainText("==================================")
-			self.LogMonitor.appendPlainText(str(roof_msg))
-			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
-
 
 	def open_dome(self):
 		thread = Thread(target = self.threaded_open_dome , args = (self,))
-		thread.start()
+		thread.start()		
 
-	def threaded_close_dome(self, empty):
-		roof_msg = controller.close_dome(speed=1)
+	def threaded_open_dome(self, empty):
+		print "opening"
+		roof_msg = controller.open_dome(speed=1)
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
 			self.LogMonitor.appendPlainText(str(roof_msg))
@@ -129,8 +121,8 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		thread = Thread(target = self.threaded_close_dome , args = (self,))
 		thread.start()
 
-	def threaded_emergency_stop(self, empty):
-		roof_msg = controller.emergency_stop()
+	def threaded_close_dome(self, empty):
+		roof_msg = controller.close_dome(speed=1)
 		if self.StartStop == True:
 			self.LogMonitor.appendPlainText("==================================")
 			self.LogMonitor.appendPlainText(str(roof_msg))
@@ -139,7 +131,26 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 	def emergency_stop(self):
 		thread = Thread(target = self.threaded_emergency_stop , args = (self,))
 		thread.start()
-	
+
+	def threaded_emergency_stop(self, empty):
+		roof_msg = controller.emergency_stop()
+		if self.StartStop == True:
+			self.LogMonitor.appendPlainText("==================================")
+			self.LogMonitor.appendPlainText(str(roof_msg))
+			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
+
+	def refresh_dome_status(self):
+		thread = Thread(target = self.threaded_refresh_dome_status , args = (self,))
+		thread.start()		
+
+	def threaded_refresh_dome_status(self, empy):
+		print "Refreshing dome status"
+		roof_msg = controller.refresh_dome_status()
+		if self.StartStop == True:
+			self.LogMonitor.appendPlainText("==================================")
+			self.LogMonitor.appendPlainText(str(roof_msg))
+			self.LogMonitor.moveCursor(QtGui.QTextCursor.End)
+
 	def log_function(self):
 		self.StartStop = not self.StartStop
 		if self.StartStop == True:

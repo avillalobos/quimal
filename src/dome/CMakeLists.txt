@@ -51,6 +51,7 @@ add_service_files(
 	FILES
 	close_dome.srv
 	open_dome.srv
+	update_status.srv
 )
 
 ## Generate actions in the 'action' folder

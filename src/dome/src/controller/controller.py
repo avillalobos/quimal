@@ -17,6 +17,10 @@ def emergency_stop():
 	global dome_controller_client
 	return dome_controller_client.emergency_stop()
 
+def refresh_dome_status():
+	global dome_controller_client
+	return dome_controller_client.try_refresh_dome_status()
+
 def getSiderealTime(eLong):
 	global dome_controller_client
 	return dome_controller_client.getSiderealTime(eLong)
