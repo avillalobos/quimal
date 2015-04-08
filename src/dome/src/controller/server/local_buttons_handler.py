@@ -17,13 +17,12 @@ rospy.init_node('LocalRemoteHandler')
 
 rospy.loginfo("Starting LocalRemote handler")
 
-def publish_set_to_local():
-	rospy.logwarn("Control has been transferred to LOCAL CONTROL ONLY!")
-	pub.publish("LOCAL")
+def publish_set_local_remote():
+	if GPIO.input(channel):
+		rospy.logwarn("Control has been transferred to LOCAL CONTROL ONLY!")
+		pub.publish("LOCAL")
+	else:
+		rospy.logwarn("Control has been transferred to REMOTE CONTROL")
+		pub.publish("REMOTE")		
 
-def publish_set_to_remote():
-	rospy.logwarn("Control has been transferred to REMOTE CONTROL")
-	pub.publish("REMOTE")
-
-GPIO.add_event_detect(local_remote_channel, GPIO.RISING, callback=publish_set_to_local, bouncetime=200)
-GPIO.add_event_detect(local_remote_channel, GPIO.FALLING, callback=publish_set_to_remote, bouncetime=200)
+GPIO.add_event_detect(local_remote_channel, GPIO.BOTH, callback=publish_set_local_remote, bouncetime=200)
