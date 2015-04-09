@@ -1,12 +1,13 @@
 # This is an abstract class to gather all the recurrent functionalities
 import rospy, time, serial, os.path
 from subprocess import call
+from std_msgs.msg import String
 
 class SuperController(object):
 	def __init__(self, arduino_name):
 		self.arduino = serial.Serial("/dev/"+str(arduino_name), timeout=30,baudrate=115200)
 		# useful only on Raspberry PI
-		self.status_pin = 18
+		self.status_pin = 4 # means ping 7 of the board
 		self.STATES={"PREPARING":"PREPARING","STARTING":"STARTING","OPENING":"OPENING","OPEN":"OPEN", "CLOSING":"CLOSING", "PARKING":"PARKING", "PARKED":"PARKED", "CLOSED":"CLOSED", "FINISH":"FINISH", "ABORTED":"ABORTED", "STOPPING":"STOPPING", "STOP":"STOP", "EMERGENCY_STOP":"EMERGENCY_STOP"}
 		self.rate = rospy.Rate(10)
 		self.data_from_arduino = ["open_button", "close_button", "opening_sensor", "closing_sensor", "safety_sensor", "meteorologic_sensor","action", "status"]

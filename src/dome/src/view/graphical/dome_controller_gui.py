@@ -10,6 +10,7 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt, QTimer
 #from sensor_msgs.msg import CompressedImage
 from sensor_msgs.msg import Image
+from std_msgs.msg import String
 
 import datetime
 import cv2
@@ -49,7 +50,8 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		rospy.Subscriber("dome/roof/status", roof, self.updateSensorStatus)
 		self.image_data = None
 		rospy.Subscriber("camera", Image, self.image_callback,  queue_size = 5)
-	
+		rospy.Subscriber("dome/mode", String, self.updateMode)
+		
 		self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
 		self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
 
@@ -104,6 +106,9 @@ class GUI_TCS_Main_Panel(QtGui.QMainWindow, dome_controller_UI.Ui_TCS_Main_Panel
 		self.sensor_display.updateSensorData("Meteorologic Sensor", "Ok", data.meteorologic_sensor)
 		self.lbl_status.setText(data.state)
 		self.lbl_next_action.setText(data.action)
+
+	def updateMode(self,data):
+		self.lbl_mode.setText(data.data)
 
 	def open_dome(self):
 		thread = Thread(target = self.threaded_open_dome , args = (self,))

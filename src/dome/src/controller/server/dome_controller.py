@@ -16,6 +16,8 @@ class DomeController(SuperController):
 		super(DomeController,self).__init__(device_name)
 		self.pub = rospy.Publisher('dome/roof/status', roof, queue_size=100)
 		rospy.Subscriber("dome/roof/status", roof, self.callback)
+		self.mode = "LOCAL"
+		rospy.Subscriber("dome/mode", String, self.updateMode)
 		# useful only on Raspberry PI
 		self.status_pin = 18
 		roof_initial_msg = self.getInitialState()
@@ -101,6 +103,10 @@ class DomeController(SuperController):
 		self.last_roof_status = self.roof_status
 		self.roof_status = data
 
+	def updateMode(self,data):
+		rospy.logwarn("Warning, a change of mode have been detected!, mode:  " + data.data)
+		self.mode = data.data
+
 #=================================================================================================
 # CORE
 #=================================================================================================
@@ -108,6 +114,12 @@ class DomeController(SuperController):
 	# Handler registered when the open service is requested
 	def handle_open(self,req):
 		rospy.loginfo("TCS is requesting to open roof at speed: " + str(req.speed))
+		if self.mode == "LOCAL":
+			rospy.loginfo("System is local only, so is not possible to operate it remotely")
+			roof_msg = roof()
+			roof_msg.state = "System is local only, so is not possible to operate it remotely"
+			rospy.logwarn(roof_msg.state)
+			return roof_msg
 		# it is only possible to open if the status of the TCS is PARKED, CLOSED, ABORTED or STOP. If an emergency stop was pressed is because there is something or someone in danger and need to be phisically disabled.
 		if self.roof_status.state == self.STATES["PARKED"] or self.roof_status.state == self.STATES["CLOSED"] or self.roof_status.state == self.STATES["ABORTED"] or self.roof_status.state == self.STATES["STOP"]:
 			if self.roof_status.state == self.STATES["EMERGENCY_STOP"]: self.roof_status = self.last_roof_status
@@ -151,6 +163,12 @@ class DomeController(SuperController):
 	# Handler registered when the close service is requested
 	def handle_close(self,req):
 		rospy.loginfo("TCS is requesting to close roof at speed: " + str(req.speed))
+		if self.mode == "LOCAL":
+			rospy.loginfo("System is local only, so is not possible to operate it remotely")
+			roof_msg = roof()
+			roof_msg.state = "System is local only, so is not possible to operate it remotely"
+			rospy.logwarn(roof_msg.state)
+			return roof_msg
 		#print "TCS is requesting to close roof at speed: ", req.speed
 		if self.roof_status.state == self.STATES["PARKED"] or self.roof_status.state == self.STATES["OPEN"] or self.roof_status.state == self.STATES["ABORTED"] or self.roof_status.state == self.STATES["STOP"]:
 			#if self.roof_status.state == self.STATES[8]: self.roof_status = self.last_roof_status
