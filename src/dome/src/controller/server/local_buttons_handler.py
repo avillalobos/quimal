@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BOARD) # using the numbers of the pin like is being used on th
 
 # We will use the ping #18 of the board of the RPi for communication with the physical environment. So buttons
 # will inform to pin 18 or the RPi when they are as local (HIGH) or remote (LOW)
-local_remote_channel = 12
+local_remote_channel = 7 # which means GPIO4
 GPIO.setup(local_remote_channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 pub = rospy.Publisher('dome/mode', String, queue_size=100)
 rospy.init_node('LocalRemoteHandler')

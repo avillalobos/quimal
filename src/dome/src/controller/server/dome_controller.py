@@ -5,6 +5,7 @@ from dome.msg import roof
 import rospy, time, serial, os.path, sys
 from super_controller import SuperController
 from subprocess import call
+from std_msgs.msg import String
 
 class DomeController(SuperController):
 
