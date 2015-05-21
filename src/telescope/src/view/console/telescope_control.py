@@ -25,9 +25,16 @@ def setslewrate():
 	status = controller.setslewrate(slew)
 
 def settarget():
-	ra = str(raw_input("Enter RA: "))
-	dec = str(raw_input("Enter DEC: "))
-	status = controller.settarget(ra,dec)
+	option = str(raw_input("Equatorial (eq) or AltAz mount (altaz): "))
+	if option == "eq":
+		ra = str(raw_input("Enter RA: "))
+		dec = str(raw_input("Enter DEC: "))
+		status = controller.seteqtarget(ra,dec)
+	elif option == "altaz":
+		alt = str(raw_input("Enter ALT: "))
+		az = str(raw_input("Enter AZ: "))
+		status = controller.setaltaztarget(alt,az)
+		
 
 def park():
 	controller.park()

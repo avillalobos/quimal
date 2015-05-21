@@ -18,7 +18,7 @@ class TelescopeControllerClient:
 	                rospy.loginfo("Telescope status: \n" + str(info))
 			return info
 	        except rospy.ServiceException, e:
-	                rospy.logfatal("Service call failed: %s" + e)
+	                rospy.logfatal("Service call failed: %s" , e)
 			return None
 
 	def setdec(self,DEC):
@@ -29,7 +29,7 @@ class TelescopeControllerClient:
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
 	        except rospy.ServiceException, e:
-	                rospy.logfatal("Service call failed: %s" + e)
+	                rospy.logfatal("Service call failed: %s" , e)
 			return None
 
 	def setra(self,RA):
@@ -40,7 +40,7 @@ class TelescopeControllerClient:
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
 	        except rospy.ServiceException, e:
-	                rospy.logfatal("Service call failed: %s" + e)
+	                rospy.logfatal("Service call failed: %s" , e)
 			return None
 
 	
@@ -52,19 +52,30 @@ class TelescopeControllerClient:
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
 	        except rospy.ServiceException, e:
-	                rospy.logfatal("Service call failed: %s" + e)
+	                rospy.logfatal("Service call failed: %s" , e)
 			return None
 
 	
-	def settarget(self,RA, DEC):
-	        rospy.wait_for_service('setTarget')
+	def seteqtarget(self,RA, DEC):
+	        rospy.wait_for_service('setEquatorialTarget')
 	        try:
-	                settarget_srv = rospy.ServiceProxy('setTarget', setTarget)
+	                settarget_srv = rospy.ServiceProxy('setEquatorialTarget', setTarget)
 	                status = settarget_srv(RA,DEC)
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
 	        except rospy.ServiceException, e:
-	                rospy.logfatal("Service call failed: %s" + e)
+	                rospy.logfatal("Service call failed: %s" , e)
+			return None
+
+	def setaltaztarget(self,ALT, AZ):
+	        rospy.wait_for_service('setAltAzimutTarget')
+	        try:
+	                settarget_srv = rospy.ServiceProxy('setAltAzimutTarget', setTarget)
+	                status = settarget_srv(ALT,AZ)
+	                rospy.loginfo("Telescope status:\n" + str(status))
+			return status
+	        except rospy.ServiceException, e:
+	                rospy.logfatal("Service call failed: %s" , e)
 			return None
 
 	def park(self):
@@ -75,7 +86,7 @@ class TelescopeControllerClient:
                         rospy.loginfo("Telescope status:\n" + str(status))
                         return status
                 except rospy.ServiceException, e:
-                        rospy.logfatal("Service call failed: %s" + e)
+                        rospy.logfatal("Service call failed: %s" , e)
                         return None
 	
 	def stopSlewing(self):
@@ -86,5 +97,5 @@ class TelescopeControllerClient:
                         rospy.loginfo("Telescope status:\n" + str(status))
                         return status
                 except rospy.ServiceException, e:
-                        rospy.logfatal("Service call failed: %s" + e)
+                        rospy.logfatal("Service call failed: %s" , e)
                         return None

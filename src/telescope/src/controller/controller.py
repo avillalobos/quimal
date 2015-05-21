@@ -20,7 +20,11 @@ def setslewrate(slew):
 	global telescope_controller_client
 	return telescope_controller_client.setslewrate(slew)
 
-def settarget(RA,DEC):
+def seteqtarget(RA,DEC):
+	global telescope_controller_client
+	return telescope_controller_client.settarget(RA,DEC)
+
+def setaltaztarget(ALT,AZ):
 	global telescope_controller_client
 	return telescope_controller_client.settarget(RA,DEC)
 

@@ -1,3 +1,4 @@
-string slew
+string direction
+string slewRate
 ---
 TelescopeInfo status

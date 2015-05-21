@@ -51,8 +51,11 @@ add_service_files(
    getInfo.srv
    setDEC.srv
    setRA.srv
+   setAltitude.srv
+   setAzimuth.srv
    setSlewRate.srv
-   setTarget.srv
+   setEquatorialTarget.srv
+   setAltAzimuthTarget.srv
    Park.srv
    StopSlewing.srv
 )
@@ -101,11 +104,15 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp executable
 #add_executable(telescope_controller src/controller/server/telescope_controller.cpp)
-add_executable(LX200 src/controller/server/LX200.cpp)
+#add_executable(LX200 src/controller/server/LX200.cpp)
+#add_executable(Celestron src/controller/server/Celestron.cpp)
+add_executable(telescopeDriver src/controller/server/telescopeDriver.cpp src/controller/server/Celestron.cpp src/controller/server/LX200.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(LX200 telescope_generate_messages_cpp)
+#add_dependencies(LX200 telescope_generate_messages_cpp)
+#add_dependencies(Celestron telescope_generate_messages_cpp)
+add_dependencies(telescopeDriver telescope_generate_messages_cpp LX200 Celestron)
 
 ## Specify libraries to link a library or executable target against
 
@@ -113,10 +120,16 @@ add_dependencies(LX200 telescope_generate_messages_cpp)
 #   ${catkin_LIBRARIES}
 #)
 
-target_link_libraries(LX200
-   ${catkin_LIBRARIES}
-)
+#target_link_libraries(LX200
+#	${catkin_LIBRARIES}
+#)
 
+#target_link_libraries(Celestron
+#	${catkin_LIBRARIES}
+#)
+target_link_libraries(telescopeDriver
+	${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
