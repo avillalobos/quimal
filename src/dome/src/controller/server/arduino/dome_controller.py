@@ -13,7 +13,7 @@ class DomeController(SuperController):
 
 	def __init__(self,device_name):
 		self.roof_status = None
-		rospy.init_node('ROOF_Controller')
+		rospy.init_node('Arduino_ROOF_Controller')
 		super(DomeController,self).__init__(device_name)
 		self.pub = rospy.Publisher('dome/roof/status', roof, queue_size=100)
 		rospy.Subscriber("dome/roof/status", roof, self.callback)
@@ -84,7 +84,7 @@ class DomeController(SuperController):
 			roof_msg.action = "No action received"
 		return roof_msg
 
-	# this code must be programated with the electronics and mechanical team.
+	# this code must be developed with the electronics and mechanical team.
 	def getInitialState(self):
 		roof_initial_msg = roof()
 		# This make a change on the pin status so that the interruption will be triggered and a message will be received by Serial port
@@ -111,27 +111,6 @@ class DomeController(SuperController):
 #=================================================================================================
 # CORE
 #=================================================================================================
-
-	# Handler registered when the open service is requested
-	def handle_open(self,req):
-		rospy.loginfo("TCS is requesting to open roof at speed: " + str(req.speed))
-		if self.mode == "LOCAL":
-			rospy.loginfo("System is local only, so is not possible to operate it remotely")
-			roof_msg = roof()
-			roof_msg.state = "System is local only, so is not possible to operate it remotely"
-			rospy.logwarn(roof_msg.state)
-			return roof_msg
-		# it is only possible to open if the status of the TCS is PARKED, CLOSED, ABORTED or STOP. If an emergency stop was pressed is because there is something or someone in danger and need to be phisically disabled.
-		if self.roof_status.state == self.STATES["PARKED"] or self.roof_status.state == self.STATES["CLOSED"] or self.roof_status.state == self.STATES["ABORTED"] or self.roof_status.state == self.STATES["STOP"]:
-			if self.roof_status.state == self.STATES["EMERGENCY_STOP"]: self.roof_status = self.last_roof_status
-			# wait until action is completed
-			roof_msg = self.action_open()
-			return roof_msg
-		else:
-			roof_msg = roof()
-			roof_msg.state = "Not possible to open due roof is in another state: " + self.roof_status.state
-			rospy.logwarn(roof_msg.state)
-			return roof_msg
 
 	# perform the actions to open the dome
 	def action_open(self):
@@ -160,28 +139,6 @@ class DomeController(SuperController):
 		else:
 			rospy.logwarn("Executing emergency stop")
 		return roof_msg
-
-	# Handler registered when the close service is requested
-	def handle_close(self,req):
-		rospy.loginfo("TCS is requesting to close roof at speed: " + str(req.speed))
-		if self.mode == "LOCAL":
-			rospy.loginfo("System is local only, so is not possible to operate it remotely")
-			roof_msg = roof()
-			roof_msg.state = "System is local only, so is not possible to operate it remotely"
-			rospy.logwarn(roof_msg.state)
-			return roof_msg
-		#print "TCS is requesting to close roof at speed: ", req.speed
-		if self.roof_status.state == self.STATES["PARKED"] or self.roof_status.state == self.STATES["OPEN"] or self.roof_status.state == self.STATES["ABORTED"] or self.roof_status.state == self.STATES["STOP"]:
-			#if self.roof_status.state == self.STATES[8]: self.roof_status = self.last_roof_status
-			#lateral_door_msg = self.action_close_lateral_door()
-			#rospy.loginfo(lateral_door_msg)
-			roof_msg = self.action_close_dome()
-			return roof_msg
-		else:
-			roof_msg = roof()
-			roof_msg.state = "Not possible to close due roof is in another state: " + self.roof_status.state
-			rospy.logwarn(roof_msg.state)
-			return roof_msg
 
 
 	# perform the actions to close the dome
@@ -233,14 +190,3 @@ class DomeController(SuperController):
 		s3 = rospy.Service('refresh_dome_status', update_status , self.handle_refresh_dome_status)
 		rospy.loginfo("ready to go!.")
 		rospy.spin()
-
-#=================================================================================================
-# MAIN
-#=================================================================================================
-
-if __name__ == "__main__":
-	if len(sys.argv) == 2:
-		dome_controller = DomeController(sys.argv[1])
-		dome_controller.server()
-	else:
-		print "You should indicate the device name as a parameter"

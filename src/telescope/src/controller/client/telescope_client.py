@@ -59,7 +59,7 @@ class TelescopeControllerClient:
 	def seteqtarget(self,RA, DEC):
 	        rospy.wait_for_service('setEquatorialTarget')
 	        try:
-	                settarget_srv = rospy.ServiceProxy('setEquatorialTarget', setTarget)
+	                settarget_srv = rospy.ServiceProxy('setEquatorialTarget', setEquatorialTarget)
 	                status = settarget_srv(RA,DEC)
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
@@ -68,9 +68,9 @@ class TelescopeControllerClient:
 			return None
 
 	def setaltaztarget(self,ALT, AZ):
-	        rospy.wait_for_service('setAltAzimutTarget')
+	        rospy.wait_for_service('setAltAzimuthTarget')
 	        try:
-	                settarget_srv = rospy.ServiceProxy('setAltAzimutTarget', setTarget)
+	                settarget_srv = rospy.ServiceProxy('setAltAzimuthTarget', setAltAzimuthTarget)
 	                status = settarget_srv(ALT,AZ)
 	                rospy.loginfo("Telescope status:\n" + str(status))
 			return status
